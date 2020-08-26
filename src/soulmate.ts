@@ -1,4 +1,4 @@
-import { Startable } from 'startable';
+import { Startable, LifePeriod } from 'startable';
 
 if (!process.send)
     console.log('WARNING: It\'s started directly.');
@@ -15,7 +15,7 @@ interface StartableConsctrutor {
     service.start((err?: Error) => {
         if (!err) return;
         console.error(err);
-        if (process.send) process.send('stopping');
+        if (process.send) process.send(LifePeriod.STOPPING);
         setTimeout(
             () => void process.exit(1),
             ERROR_STOP_TIMEOUT,
@@ -24,7 +24,9 @@ interface StartableConsctrutor {
             .catch(console.error)
             .then(() => void process.exit(1));
     }).then(() => {
-        if (process.send) process.send('started');
+        if (process.send) process.send(LifePeriod.STARTED);
+    }, (err?: Error) => {
+        if (process.send) process.send(LifePeriod.FAILED);
     });
     process.on('SIGINT', () => {
         service.stop();
