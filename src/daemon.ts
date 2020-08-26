@@ -2,10 +2,7 @@ import Koa from 'koa';
 import Router from 'koa-router';
 import Controller from './controller';
 import { Config } from './interfaces';
-import {
-    PORT,
-    STOP_SIGNAL,
-} from './config';
+import { PORT } from './config';
 
 const daemon = new Koa();
 const router = new Router();

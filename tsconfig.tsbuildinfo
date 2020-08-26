@@ -212,8 +212,8 @@
         "affectsGlobalScope": false
       },
       "./src/config.ts": {
-        "version": "c003f5f545771f30d1b3f07e8774d88fdd1a113175d52ae166836d8126cd7755",
-        "signature": "bf97dbfb966a33a52673537add0c4516b156e7f304582f732b943218a7dc55b9",
+        "version": "b2cae6967faec841064c2ccca2de1272e6ab7c3d370ef50f48245f6ed0c0d9b9",
+        "signature": "ee57a45de8c41a6b7ce5b9d08842e623f8da57bbabb25c65936dc747c309d62c",
         "affectsGlobalScope": false
       },
       "./node_modules/startable/dist/startable.d.ts": {
@@ -227,12 +227,12 @@
         "affectsGlobalScope": false
       },
       "./src/interfaces.ts": {
-        "version": "8f30e88a60f8b085b2b4e5930e7c3ce3344279d9f6c3cd3ad2c99c62d08ae1f4",
-        "signature": "c7979634e4d3ad758f6ca92c587b17741d20cf170e1dea70c8d855a75c7cf825",
+        "version": "eb2e23736a0d1ba887193b89caa2603a187b0b5b54d6ba229ead8598d4c2a05d",
+        "signature": "e58b5068d0d5099ddb8d66146c9aeb4bccfd0e49f3a98077f71e4d50e503922b",
         "affectsGlobalScope": false
       },
       "./src/controller.ts": {
-        "version": "0961ba27f525feef388d55b2cf80a15bfa8b83754f2a9717738393f70619bcf0",
+        "version": "1a2be638911d890d275f159cb48625d9aba353f26ad92c8f068de86f48ac33ad",
         "signature": "0f1153a917717cec3e35a71dfa6619f6c4ee748cddd65076012168ea1af4d4a8",
         "affectsGlobalScope": false
       },
@@ -582,12 +582,12 @@
         "affectsGlobalScope": false
       },
       "./src/daemon.ts": {
-        "version": "12422509703fddaf9bb21d7c0750e44fb793c10bdf94a6845b4921334c13a9b7",
+        "version": "627415148f5f575a2f859cc220e6460888384658aa2862c0269b51d94edf2cd1",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
       "./src/soulmate.ts": {
-        "version": "b7c71f38fa6ac113c31ecd74dc9f2e0bcff9e5c91caa1b009118eebdb12e1653",
+        "version": "feb5200a7632aa1c583bad6753605cd6ffd5fac7e3962e69cd9d258a80c1764f",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
@@ -1376,12 +1376,14 @@
         "./src/interfaces.ts"
       ],
       "./src/interfaces.ts": [
+        "./node_modules/@types/node/child_process.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/startable/dist/index.d.ts"
       ],
       "./src/soulmate.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -1390,7 +1392,8 @@
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
-        "./node_modules/startable/dist/index.d.ts"
+        "./node_modules/startable/dist/index.d.ts",
+        "./src/config.ts"
       ],
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -2434,6 +2437,10 @@
       "./src/controller.ts": [
         "./node_modules/startable/dist/index.d.ts",
         "./src/interfaces.ts"
+      ],
+      "./src/interfaces.ts": [
+        "./node_modules/@types/node/child_process.d.ts",
+        "./node_modules/startable/dist/index.d.ts"
       ],
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
         "./node_modules/@types/node/fs.d.ts",

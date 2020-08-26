@@ -1,9 +1,8 @@
 import { Startable, LifePeriod } from 'startable';
+import { STOP_TIMEOUT } from './config';
 
-if (!process.send)
+if (!process.env.epimetheus)
     console.log('WARNING: It\'s started directly.');
-
-const ERROR_STOP_TIMEOUT = 3000;
 
 interface StartableConsctrutor {
     new(...args: any[]): Startable;
@@ -13,20 +12,23 @@ interface StartableConsctrutor {
     const Service: StartableConsctrutor = await import(process.argv[3]);
     const service = new Service();
     service.start((err?: Error) => {
-        if (!err) return;
-        console.error(err);
-        if (process.send) process.send(LifePeriod.STOPPING);
+        if (err) console.error(err);
+        if (process.env.epimetheus) process.send!(LifePeriod.STOPPING);
         setTimeout(
-            () => void process.exit(1),
-            ERROR_STOP_TIMEOUT,
+            () => {
+                console.error(new Error('stop() times out.'));
+                process.exit(0);
+            },
+            STOP_TIMEOUT,
         ).unref();
         service.stopped
             .catch(console.error)
-            .then(() => void process.exit(1));
+            .then(() => void process.exit(0));
     }).then(() => {
-        if (process.send) process.send(LifePeriod.STARTED);
-    }, (err?: Error) => {
-        if (process.send) process.send(LifePeriod.FAILED);
+        if (process.env.epimetheus) process.send!(LifePeriod.STARTED);
+    }, (err: Error) => {
+        console.error(err);
+        if (process.env.epimetheus) process.send!(LifePeriod.FAILED);
     });
     process.on('SIGINT', () => {
         service.stop();

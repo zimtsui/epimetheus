@@ -9,14 +9,20 @@ class Controller extends Startable {
     }
     async _start() {
         this.process = fork(this.config.servicePath, this.config.args, { cwd: this.config.cwd });
-        this.process.on('message', msg => {
-            if (msg === 4 /* STOPPING */)
-                this.stop(new Error('crash'));
+        this.process.on('message', (message) => {
+            if (message === 4 /* STOPPING */)
+                this.stop(new Error());
         });
-        await new Promise(resolve => {
-            this.process.on('message', msg => {
-                if (msg === 2 /* STARTED */)
-                    resolve();
+        await new Promise((resolve, reject) => {
+            this.process.on('message', (message) => {
+                switch (message) {
+                    case 2 /* STARTED */:
+                        resolve();
+                        break;
+                    case 3 /* FAILED */:
+                        reject();
+                        break;
+                }
             });
         });
     }

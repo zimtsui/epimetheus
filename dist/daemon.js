@@ -1,7 +1,7 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import Controller from './controller';
-import { PORT, } from './config';
+import { PORT } from './config';
 const daemon = new Koa();
 const router = new Router();
 const controllers = new Set();

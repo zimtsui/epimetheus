@@ -17,12 +17,15 @@ class Controller extends Startable {
             this.config.args,
             { cwd: this.config.cwd }
         );
-        this.process.on('message', msg => {
-            if (msg === LifePeriod.STOPPING) this.stop(new Error('crash'));
+        this.process.on('message', (message: LifePeriod) => {
+            if (message === LifePeriod.STOPPING) this.stop(new Error());
         });
-        await new Promise(resolve => {
-            this.process.on('message', msg => {
-                if (msg === LifePeriod.STARTED) resolve();
+        await new Promise((resolve, reject) => {
+            this.process.on('message', (message: LifePeriod) => {
+                switch (message) {
+                    case LifePeriod.STARTED: resolve(); break;
+                    case LifePeriod.FAILED: reject(); break;
+                }
             });
         });
     }
