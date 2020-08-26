@@ -2,6 +2,7 @@ import { Startable } from 'startable';
 import { fork } from 'child_process';
 import { once } from 'events';
 import { STOP_SIGNAL } from './config';
+// TODO: 要考虑 subp.kill 失败的情况
 class Controller extends Startable {
     constructor(config) {
         super();
@@ -9,16 +10,16 @@ class Controller extends Startable {
         this.shouldBeRunning = true;
     }
     async _start() {
-        this.process = fork(this.config.servicePath, this.config.args, {
+        this.subp = fork(this.config.servicePath, this.config.args, {
             cwd: this.config.cwd,
             execArgv: this.config.nodeArgs,
         });
-        this.process.on('message', (message) => {
+        this.subp.on('message', (message) => {
             if (message === 4 /* STOPPING */)
                 this.stop(new Error());
         });
         await new Promise((resolve, reject) => {
-            this.process.on('message', (message) => {
+            this.subp.on('message', (message) => {
                 switch (message) {
                     case 2 /* STARTED */:
                         resolve();
@@ -32,8 +33,8 @@ class Controller extends Startable {
     }
     async _stop(err) {
         if (!err)
-            this.process.kill(STOP_SIGNAL);
-        await once(this.process, 'exit');
+            this.subp.kill(STOP_SIGNAL);
+        await once(this.subp, 'exit');
     }
 }
 export { Controller as default, Controller, };

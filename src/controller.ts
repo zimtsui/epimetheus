@@ -4,8 +4,10 @@ import { once } from 'events';
 import { STOP_SIGNAL } from './config';
 import { Config } from './interfaces';
 
+// TODO: 要考虑 subp.kill 失败的情况
+
 class Controller extends Startable {
-    private process!: ChildProcess;
+    private subp!: ChildProcess;
     public shouldBeRunning = true;
 
     constructor(public config: Config) {
@@ -13,7 +15,7 @@ class Controller extends Startable {
     }
 
     protected async _start() {
-        this.process = fork(
+        this.subp = fork(
             this.config.servicePath,
             this.config.args,
             {
@@ -21,11 +23,11 @@ class Controller extends Startable {
                 execArgv: this.config.nodeArgs,
             }
         );
-        this.process.on('message', (message: LifePeriod) => {
+        this.subp.on('message', (message: LifePeriod) => {
             if (message === LifePeriod.STOPPING) this.stop(new Error());
         });
         await new Promise((resolve, reject) => {
-            this.process.on('message', (message: LifePeriod) => {
+            this.subp.on('message', (message: LifePeriod) => {
                 switch (message) {
                     case LifePeriod.STARTED: resolve(); break;
                     case LifePeriod.FAILED: reject(); break;
@@ -35,8 +37,8 @@ class Controller extends Startable {
     }
 
     protected async _stop(err?: Error) {
-        if (!err) this.process.kill(STOP_SIGNAL);
-        await once(this.process, 'exit');
+        if (!err) this.subp.kill(STOP_SIGNAL);
+        await once(this.subp, 'exit');
     }
 }
 

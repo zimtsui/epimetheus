@@ -1,5 +1,21 @@
 import { Startable, LifePeriod } from 'startable';
 import { STOP_TIMEOUT } from './config';
+import path from 'path';
+
+process.on('unhandledRejection', (reason, promise) => {
+    if (!(
+        promise instanceof TypeError ||
+        promise instanceof RangeError ||
+        promise instanceof SyntaxError ||
+        promise instanceof ReferenceError
+    )) {
+        promise.catch(() => { });
+    }
+});
+
+if (process.env.epimetheus === 'false') process.env.epimetheus = '';
+if (process.env.epimetheus === 'FALSE') process.env.epimetheus = '';
+if (process.env.epimetheus === '') process.env.epimetheus = 'true';
 
 if (!process.env.epimetheus)
     console.log('WARNING: It\'s started directly.');
@@ -9,11 +25,15 @@ interface StartableConsctrutor {
 }
 
 (async () => {
-    const Service: StartableConsctrutor = await import(process.argv[2]);
+    const Service: StartableConsctrutor = (await import(
+        path.resolve(process.cwd(), process.argv[2])
+    )).default;
     const service = new Service();
     service.start((err?: Error) => {
         if (err) console.error(err);
-        if (process.env.epimetheus) process.send!(LifePeriod.STOPPING);
+        if (process.env.epimetheus) {
+            process.send!(LifePeriod.STOPPING);
+        }
         setTimeout(
             () => {
                 console.error(new Error('stop() times out.'));
@@ -28,11 +48,12 @@ interface StartableConsctrutor {
             });
     }).then(() => {
         if (process.env.epimetheus) process.send!(LifePeriod.STARTED);
-    }, (err: Error) => {
-        console.error(err);
+        console.log(`service.life: ${service.lifePeriod}`);
+    }, () => {
         if (process.env.epimetheus) process.send!(LifePeriod.FAILED);
     });
+
     process.on('SIGINT', () => {
         service.stop();
     });
-})();
+})().catch(console.error);
