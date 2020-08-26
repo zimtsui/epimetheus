@@ -602,7 +602,7 @@
         "affectsGlobalScope": false
       },
       "./src/soulmate.ts": {
-        "version": "0c69ea1ceccd22e166e06514fd99df0a06a4b47753e6950864af6ab863ad60b4",
+        "version": "bf32b526e89e3d54936aab7f90a12d35b92cdff0ae68bf581d6b93129fd17092",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },

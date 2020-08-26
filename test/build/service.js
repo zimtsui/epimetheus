@@ -10,7 +10,7 @@ class Service extends Startable {
                 break;
             case 'self stop':
                 // delay(500).then(() => this.stop(new Error('self stop')));
-                this.stop(new Error('self stop'));
+                this.stop(new Error('self stop')).catch(console.error);
                 break;
             case 'failed':
                 throw new Error('failed');
@@ -20,7 +20,7 @@ class Service extends Startable {
                 break;
             case 'self stop broken':
                 // delay(500).then(() => this.stop(new Error('self stop')));
-                this.stop(new Error('self stop'));
+                this.stop(new Error('self stop')).catch(console.error);
                 break;
         }
     }

@@ -7,6 +7,7 @@ const soulmatePath = '/home/zim/projects/epimetheus/dist/soulmate.js';
 const servicePath = '/home/zim/projects/epimetheus/test/build/service.js';
 const dirPath = '/home/zim/projects/epimetheus/test/build';
 const nodeArg = '--experimental-specifier-resolution=node';
+const stdio = undefined;
 export async function testSoulmateNormal(t) {
     const subp = fork(soulmatePath, [servicePath, 'normal'], {
         cwd: dirPath,
