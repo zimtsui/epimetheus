@@ -2,7 +2,7 @@ import { STOP_TIMEOUT } from './config';
 if (!process.env.epimetheus)
     console.log('WARNING: It\'s started directly.');
 (async () => {
-    const Service = await import(process.argv[3]);
+    const Service = await import(process.argv[2]);
     const service = new Service();
     service.start((err) => {
         if (err)
@@ -15,7 +15,10 @@ if (!process.env.epimetheus)
         }, STOP_TIMEOUT).unref();
         service.stopped
             .catch(console.error)
-            .then(() => void process.exit(0));
+            .then(() => {
+            if (process.env.epimetheus)
+                process.disconnect();
+        });
     }).then(() => {
         if (process.env.epimetheus)
             process.send(2 /* STARTED */);

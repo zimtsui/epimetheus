@@ -9,7 +9,7 @@ interface StartableConsctrutor {
 }
 
 (async () => {
-    const Service: StartableConsctrutor = await import(process.argv[3]);
+    const Service: StartableConsctrutor = await import(process.argv[2]);
     const service = new Service();
     service.start((err?: Error) => {
         if (err) console.error(err);
@@ -23,7 +23,9 @@ interface StartableConsctrutor {
         ).unref();
         service.stopped
             .catch(console.error)
-            .then(() => void process.exit(0));
+            .then(() => {
+                if (process.env.epimetheus) process.disconnect();
+            });
     }).then(() => {
         if (process.env.epimetheus) process.send!(LifePeriod.STARTED);
     }, (err: Error) => {
