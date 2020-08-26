@@ -3,6 +3,7 @@ import { Config } from './interfaces';
 declare class Controller extends Startable {
     config: Config;
     private process;
+    shouldBeRunning: boolean;
     constructor(config: Config);
     protected _start(): Promise<void>;
     protected _stop(err?: Error): Promise<void>;

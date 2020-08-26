@@ -6,9 +6,13 @@ class Controller extends Startable {
     constructor(config) {
         super();
         this.config = config;
+        this.shouldBeRunning = true;
     }
     async _start() {
-        this.process = fork(this.config.servicePath, this.config.args, { cwd: this.config.cwd });
+        this.process = fork(this.config.servicePath, this.config.args, {
+            cwd: this.config.cwd,
+            execArgv: this.config.nodeArgs,
+        });
         this.process.on('message', (message) => {
             if (message === 4 /* STOPPING */)
                 this.stop(new Error());

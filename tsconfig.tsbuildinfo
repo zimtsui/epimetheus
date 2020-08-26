@@ -227,13 +227,13 @@
         "affectsGlobalScope": false
       },
       "./src/interfaces.ts": {
-        "version": "eb2e23736a0d1ba887193b89caa2603a187b0b5b54d6ba229ead8598d4c2a05d",
-        "signature": "e58b5068d0d5099ddb8d66146c9aeb4bccfd0e49f3a98077f71e4d50e503922b",
+        "version": "1fe3cd277c5262cb2d51c2a8aedbd31c8d883f4aa5ef7a566fb0304ccbd514fd",
+        "signature": "0053b07168210dad4a289c574985664de8d5972711628120ac5a9d5e8762715a",
         "affectsGlobalScope": false
       },
       "./src/controller.ts": {
-        "version": "1a2be638911d890d275f159cb48625d9aba353f26ad92c8f068de86f48ac33ad",
-        "signature": "0f1153a917717cec3e35a71dfa6619f6c4ee748cddd65076012168ea1af4d4a8",
+        "version": "781c88cd124097786d56945866e69a0b5b59022eb1bb7c0b72ce094dd88f3c98",
+        "signature": "e4682d15b86b2c6dc351e5ab44e896940a93213015254bbbe7cf9035e057a966",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/node/globals.d.ts": {
@@ -581,8 +581,18 @@
         "signature": "f394c991a6ac820eeec0877ec9db024d73d088c89ceb504278e50ce7dfbc7987",
         "affectsGlobalScope": false
       },
+      "./node_modules/@types/koa-bodyparser/index.d.ts": {
+        "version": "b8d67a816b437cd16692069fa2d9c2255216673fdf9d1bdd6a9d2f23a803796f",
+        "signature": "b8d67a816b437cd16692069fa2d9c2255216673fdf9d1bdd6a9d2f23a803796f",
+        "affectsGlobalScope": false
+      },
+      "./src/getInfo.ts": {
+        "version": "de8fb2b0931eae5635f157fbccdd44143c4841f7508aae6ed51cb89ef0d6b251",
+        "signature": "228c13cb0f6d3ed12cc47a971664956854749449ed6b962b2cb7fc2219218854",
+        "affectsGlobalScope": false
+      },
       "./src/daemon.ts": {
-        "version": "627415148f5f575a2f859cc220e6460888384658aa2862c0269b51d94edf2cd1",
+        "version": "731397ded74027092d3939ed17c7967507706b470f5445cd55c7e8ac8f9c9577",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
@@ -717,6 +727,15 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@types/keygrip/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/koa-bodyparser/index.d.ts": [
+        "./node_modules/@types/koa/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1363,6 +1382,7 @@
         "./src/interfaces.ts"
       ],
       "./src/daemon.ts": [
+        "./node_modules/@types/koa-bodyparser/index.d.ts",
         "./node_modules/@types/koa-router/index.d.ts",
         "./node_modules/@types/koa/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
@@ -1372,6 +1392,18 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./src/config.ts",
+        "./src/controller.ts",
+        "./src/getInfo.ts",
+        "./src/interfaces.ts"
+      ],
+      "./src/getInfo.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/startable/dist/index.d.ts",
         "./src/controller.ts",
         "./src/interfaces.ts"
       ],
@@ -1819,6 +1851,15 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@types/keygrip/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/koa-bodyparser/index.d.ts": [
+        "./node_modules/@types/koa/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -2438,6 +2479,11 @@
         "./node_modules/startable/dist/index.d.ts",
         "./src/interfaces.ts"
       ],
+      "./src/getInfo.ts": [
+        "./node_modules/startable/dist/index.d.ts",
+        "./src/controller.ts",
+        "./src/interfaces.ts"
+      ],
       "./src/interfaces.ts": [
         "./node_modules/@types/node/child_process.d.ts",
         "./node_modules/startable/dist/index.d.ts"
@@ -2775,6 +2821,7 @@
       "./node_modules/@types/http-assert/index.d.ts",
       "./node_modules/@types/http-errors/index.d.ts",
       "./node_modules/@types/keygrip/index.d.ts",
+      "./node_modules/@types/koa-bodyparser/index.d.ts",
       "./node_modules/@types/koa-compose/index.d.ts",
       "./node_modules/@types/koa-router/index.d.ts",
       "./node_modules/@types/koa/index.d.ts",
@@ -2841,6 +2888,7 @@
       "./src/config.ts",
       "./src/controller.ts",
       "./src/daemon.ts",
+      "./src/getInfo.ts",
       "./src/interfaces.ts",
       "./src/soulmate.ts",
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts",

@@ -1,0 +1,1 @@
+{"version":3,"file":"getInfo.js","sourceRoot":"","sources":["../src/getInfo.ts"],"names":[],"mappings":"AAQA,SAAS,OAAO,CAAC,MAAkB;IAC/B,OAAO;QACH,GAAG,MAAM,CAAC,MAAM;QAChB,MAAM,EAAE,MAAM,CAAC,UAAU;KAC5B,CAAC;AACN,CAAC;AAED,OAAO,EACH,OAAO,IAAI,OAAO,EAClB,OAAO,GAEV,CAAA"}

@@ -6,7 +6,7 @@ export interface Config {
     servicePath: string;
     cwd: string;
     args: string[];
-    nodeArgs: string;
+    nodeArgs: string[];
 }
 export interface Message {
     event: LifePeriod;

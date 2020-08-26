@@ -6,6 +6,7 @@ import { Config } from './interfaces';
 
 class Controller extends Startable {
     private process!: ChildProcess;
+    public shouldBeRunning = true;
 
     constructor(public config: Config) {
         super();
@@ -15,7 +16,10 @@ class Controller extends Startable {
         this.process = fork(
             this.config.servicePath,
             this.config.args,
-            { cwd: this.config.cwd }
+            {
+                cwd: this.config.cwd,
+                execArgv: this.config.nodeArgs,
+            }
         );
         this.process.on('message', (message: LifePeriod) => {
             if (message === LifePeriod.STOPPING) this.stop(new Error());
