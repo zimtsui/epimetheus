@@ -1,22 +1,25 @@
 import { fork } from 'child_process';
 import { once } from 'events';
 import { STOP_SIGNAL } from '../../dist/config';
-import Bluebird from 'bluebird';
-const { delay } = Bluebird;
-const soulmatePath = '/home/zim/projects/epimetheus/dist/soulmate.js';
-const servicePath = '/home/zim/projects/epimetheus/test/build/service.js';
-const dirPath = '/home/zim/projects/epimetheus/test/build';
+import { resolve, dirname } from 'path';
+import { fileURLToPath } from 'url';
+import { promisify } from 'util';
+const sleep = promisify(setTimeout);
+const packagePath = resolve(fileURLToPath(dirname(import.meta.url)), '../..');
+const soulmatePath = resolve(packagePath, './dist/soulmate.js');
+const servicePath = resolve(packagePath, './test/build/service.js');
+const workingDirPath = resolve(packagePath, './test/build');
 const nodeArg = '--experimental-specifier-resolution=node';
-const stdio = undefined;
+const stdio = process.env.NODE_ENV === 'test' ? 'ignore' : 'inherit';
 export async function testSoulmateNormal(t) {
     const subp = fork(soulmatePath, [servicePath, 'normal'], {
-        cwd: dirPath,
+        cwd: workingDirPath,
         execArgv: [nodeArg],
         env: {
             ...process.env,
             epimetheus: 'true',
         },
-        stdio: 'ignore',
+        stdio,
     });
     await new Promise(resolve => {
         subp.on('message', message => {
@@ -35,13 +38,13 @@ export async function testSoulmateNormal(t) {
 }
 export async function testSoulmateSelfStop(t) {
     const subp = fork(soulmatePath, [servicePath, 'self stop'], {
-        cwd: dirPath,
+        cwd: workingDirPath,
         execArgv: [nodeArg],
         env: {
             ...process.env,
             epimetheus: '',
         },
-        stdio: 'ignore',
+        stdio,
     });
     await Promise.all([
         new Promise(resolve => {
@@ -61,13 +64,13 @@ export async function testSoulmateSelfStop(t) {
 }
 export async function testSoulmateFailed(t) {
     const subp = fork(soulmatePath, [servicePath, 'failed'], {
-        cwd: dirPath,
+        cwd: workingDirPath,
         execArgv: [nodeArg],
         env: {
             ...process.env,
             epimetheus: '',
         },
-        stdio: 'ignore',
+        stdio,
     });
     await Promise.all([
         new Promise(resolve => {
@@ -87,13 +90,13 @@ export async function testSoulmateFailed(t) {
 }
 export async function testSoulmateBroken(t) {
     const subp = fork(soulmatePath, [servicePath, 'broken'], {
-        cwd: dirPath,
+        cwd: workingDirPath,
         execArgv: [nodeArg],
         env: {
             ...process.env,
             epimetheus: '',
         },
-        stdio: 'ignore',
+        stdio,
     });
     await new Promise(resolve => {
         subp.on('message', message => {
@@ -112,13 +115,13 @@ export async function testSoulmateBroken(t) {
 }
 export async function testSoulmateSelfStopBroken(t) {
     const subp = fork(soulmatePath, [servicePath, 'self stop broken'], {
-        cwd: dirPath,
+        cwd: workingDirPath,
         execArgv: [nodeArg],
         env: {
             ...process.env,
             epimetheus: '',
         },
-        stdio: 'ignore',
+        stdio,
     });
     await Promise.all([
         new Promise(resolve => {

@@ -1,5 +1,5 @@
 import { STOP_TIMEOUT } from './config';
-import path from 'path';
+import { resolve } from 'path';
 if (process.env.epimetheus === 'false')
     process.env.epimetheus = '';
 else if (process.env.epimetheus === 'FALSE')
@@ -9,7 +9,7 @@ else if (process.env.epimetheus === '')
 if (!process.env.epimetheus)
     console.log('WARNING: It\'s not called by epimetheus.');
 (async () => {
-    const Service = (await import(path.resolve(process.cwd(), process.argv[2]))).default;
+    const Service = (await import(resolve(process.cwd(), process.argv[2]))).default;
     const service = new Service();
     service.start((err) => {
         if (err)

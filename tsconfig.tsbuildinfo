@@ -201,44 +201,14 @@
         "signature": "cd6efb9467a8b6338ece2e2855e37765700f2cd061ca54b01b33878cf5c7677e",
         "affectsGlobalScope": true
       },
-      "./node_modules/@types/minimist/index.d.ts": {
-        "version": "3602dfff3072caea42f23a9b63fb34a7b0c95a62b93ce2add5fe6b159447845e",
-        "signature": "3602dfff3072caea42f23a9b63fb34a7b0c95a62b93ce2add5fe6b159447845e",
+      "./node_modules/@types/yargs-parser/index.d.ts": {
+        "version": "fdfbe321c556c39a2ecf791d537b999591d0849e971dd938d88f460fea0186f6",
+        "signature": "fdfbe321c556c39a2ecf791d537b999591d0849e971dd938d88f460fea0186f6",
         "affectsGlobalScope": false
       },
-      "./src/cli.ts": {
-        "version": "9e2de9d27e2e0697cef7f0d74f791afb84a49a5b98d8e38e4e52971c4247b60a",
-        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
-        "affectsGlobalScope": false
-      },
-      "./src/config.ts": {
-        "version": "842b8c3395249feaa94579ee86160f3a2f18a2d38f39c247c15ed01fdf69233a",
-        "signature": "b863206f59bab719c708818f3ce66e171545991288cf2b2ba74081d87d2ef62e",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/startable/dist/primitive.d.ts": {
-        "version": "7720c476bbd88dbac29bd4decba6f94e8e2a78618c97aa1b2201efd23597d3d9",
-        "signature": "7720c476bbd88dbac29bd4decba6f94e8e2a78618c97aa1b2201efd23597d3d9",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/startable/dist/startable.d.ts": {
-        "version": "328d27b2b3bfdae55356c0682b5f8c7dbde435b87f364eb8abed4cf8922a516a",
-        "signature": "328d27b2b3bfdae55356c0682b5f8c7dbde435b87f364eb8abed4cf8922a516a",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/startable/dist/index.d.ts": {
-        "version": "5913c256635f2d03ecdbae2cbe9e70577750576ee4e46660affc4147f47291e2",
-        "signature": "5913c256635f2d03ecdbae2cbe9e70577750576ee4e46660affc4147f47291e2",
-        "affectsGlobalScope": false
-      },
-      "./src/interfaces.ts": {
-        "version": "1fe3cd277c5262cb2d51c2a8aedbd31c8d883f4aa5ef7a566fb0304ccbd514fd",
-        "signature": "0053b07168210dad4a289c574985664de8d5972711628120ac5a9d5e8762715a",
-        "affectsGlobalScope": false
-      },
-      "./src/controller.ts": {
-        "version": "cbc8b501dbc7dd0a516a9c0915a79a8f883dcc2d637979b8e7b43422fcf3adfc",
-        "signature": "00b7c876278245f0ff5b3a7876312dc3321b62307439a9db95ee49fff0e85541",
+      "./node_modules/@types/yargs/index.d.ts": {
+        "version": "27d92f477d76685eff84f9cc352f8a56d024b6bfdac426e37c2c5ece37c4d733",
+        "signature": "27d92f477d76685eff84f9cc352f8a56d024b6bfdac426e37c2c5ece37c4d733",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/node/globals.d.ts": {
@@ -501,6 +471,56 @@
         "signature": "d522314e80ed71b57e3c2939d3c9594eaae63a4adf028559e6574f6b270b0fee",
         "affectsGlobalScope": false
       },
+      "./node_modules/form-data/index.d.ts": {
+        "version": "cbb7029e32a6a72178cda8baa9129b1ee6d1d779a35e46c780e38b4909d42a89",
+        "signature": "cbb7029e32a6a72178cda8baa9129b1ee6d1d779a35e46c780e38b4909d42a89",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node-fetch/externals.d.ts": {
+        "version": "972f1e91dab93b182624a17eeed02f683b8cb3fefbda7b689cc84570029d5f73",
+        "signature": "972f1e91dab93b182624a17eeed02f683b8cb3fefbda7b689cc84570029d5f73",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/@types/node-fetch/index.d.ts": {
+        "version": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe",
+        "signature": "f51382950fa81e3a54e9fd9f343fe583cfbb221f15a51936e12411699347effe",
+        "affectsGlobalScope": false
+      },
+      "./src/config.ts": {
+        "version": "842b8c3395249feaa94579ee86160f3a2f18a2d38f39c247c15ed01fdf69233a",
+        "signature": "b863206f59bab719c708818f3ce66e171545991288cf2b2ba74081d87d2ef62e",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/startable/dist/primitive.d.ts": {
+        "version": "01bd0fb0f8e67915114c70c8c5e3779679167811a2863d30088483a60049a463",
+        "signature": "01bd0fb0f8e67915114c70c8c5e3779679167811a2863d30088483a60049a463",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/startable/dist/startable.d.ts": {
+        "version": "328d27b2b3bfdae55356c0682b5f8c7dbde435b87f364eb8abed4cf8922a516a",
+        "signature": "328d27b2b3bfdae55356c0682b5f8c7dbde435b87f364eb8abed4cf8922a516a",
+        "affectsGlobalScope": false
+      },
+      "./node_modules/startable/dist/index.d.ts": {
+        "version": "5913c256635f2d03ecdbae2cbe9e70577750576ee4e46660affc4147f47291e2",
+        "signature": "5913c256635f2d03ecdbae2cbe9e70577750576ee4e46660affc4147f47291e2",
+        "affectsGlobalScope": false
+      },
+      "./src/interfaces.ts": {
+        "version": "91fa1e31cf4c17af2b7f62e07094cf2937d03ae07f3219e76b0e5a12e3c04bbe",
+        "signature": "da208e0be32920754b2568c531000f64f27c4e8bf8579649a13ac966b35758ae",
+        "affectsGlobalScope": false
+      },
+      "./src/controller.ts": {
+        "version": "0fa9cbde9bfd1ef4a12390393101dbde10ff278960a08ad2e3d79e397fad587d",
+        "signature": "00b7c876278245f0ff5b3a7876312dc3321b62307439a9db95ee49fff0e85541",
+        "affectsGlobalScope": false
+      },
+      "./src/cli.ts": {
+        "version": "028e5dd527672c09f16ce2035059636f031e280768e27588a51115987d225695",
+        "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
+        "affectsGlobalScope": false
+      },
       "./node_modules/@types/accepts/index.d.ts": {
         "version": "6738101ae8e56cd3879ab3f99630ada7d78097fc9fd334df7e766216778ca219",
         "signature": "6738101ae8e56cd3879ab3f99630ada7d78097fc9fd334df7e766216778ca219",
@@ -597,23 +617,28 @@
         "affectsGlobalScope": false
       },
       "./src/daemon.ts": {
-        "version": "731397ded74027092d3939ed17c7967507706b470f5445cd55c7e8ac8f9c9577",
+        "version": "c923924a2328a170fef0e42df64c9318b11458cec597c6d4b71a13cdb09fb910",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "affectsGlobalScope": false
+      },
+      "./src/index.ts": {
+        "version": "ab2e9426de99e27b1fa4f2d2971a833812ce50e920f1b5f55515b663de274ad3",
+        "signature": "05af4593e7bb6686a6c6e67c620f1af105b2c4351c235b940363cfda3edf7d89",
         "affectsGlobalScope": false
       },
       "./src/soulmate.ts": {
-        "version": "bf32b526e89e3d54936aab7f90a12d35b92cdff0ae68bf581d6b93129fd17092",
+        "version": "5b4e6b903ae0bd7e74ad418e4b02c1f165c1f3d559189102595ba222e962659b",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
-        "affectsGlobalScope": false
-      },
-      "./node_modules/@types/bluebird/index.d.ts": {
-        "version": "1a6100f908d642fe1c74d1354b0e12ee647655b8d355159a1bb4c62ae874ccea",
-        "signature": "1a6100f908d642fe1c74d1354b0e12ee647655b8d355159a1bb4c62ae874ccea",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/chai/index.d.ts": {
         "version": "2fc02febc18eb7df45ce134505a190daeb2fad54c71d12f41a741d47c0cc5549",
         "signature": "2fc02febc18eb7df45ce134505a190daeb2fad54c71d12f41a741d47c0cc5549",
+        "affectsGlobalScope": true
+      },
+      "./node_modules/@types/chai-as-promised/index.d.ts": {
+        "version": "c8a2f72f046b5efb790cc37cfe79dcf11ce8e35e7e7d9430e10e53e0aa05c7a2",
+        "signature": "c8a2f72f046b5efb790cc37cfe79dcf11ce8e35e7e7d9430e10e53e0aa05c7a2",
         "affectsGlobalScope": true
       },
       "./node_modules/@types/color-name/index.d.ts": {
@@ -631,6 +656,11 @@
         "signature": "393137c76bd922ba70a2f8bf1ade4f59a16171a02fb25918c168d48875b0cfb0",
         "affectsGlobalScope": false
       },
+      "./node_modules/@types/minimist/index.d.ts": {
+        "version": "3602dfff3072caea42f23a9b63fb34a7b0c95a62b93ce2add5fe6b159447845e",
+        "signature": "3602dfff3072caea42f23a9b63fb34a7b0c95a62b93ce2add5fe6b159447845e",
+        "affectsGlobalScope": false
+      },
       "./node_modules/@types/normalize-package-data/index.d.ts": {
         "version": "c9ad058b2cc9ce6dc2ed92960d6d009e8c04bef46d3f5312283debca6869f613",
         "signature": "c9ad058b2cc9ce6dc2ed92960d6d009e8c04bef46d3f5312283debca6869f613",
@@ -639,7 +669,7 @@
     },
     "options": {
       "target": 7,
-      "module": 6,
+      "module": 99,
       "moduleResolution": 2,
       "lib": [
         "lib.esnext.d.ts"
@@ -665,14 +695,6 @@
         "./node_modules/@types/node/ts3.7/index.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
-      "./node_modules/@types/bluebird/index.d.ts": [
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/process.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/process.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
-      ],
       "./node_modules/@types/body-parser/index.d.ts": [
         "./node_modules/@types/connect/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
@@ -682,6 +704,15 @@
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/ts3.7/index.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/chai-as-promised/index.d.ts": [
+        "./node_modules/@types/chai/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@types/chai/index.d.ts": [
@@ -862,6 +893,27 @@
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/node-fetch/externals.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/node-fetch/index.d.ts": [
+        "./node_modules/@types/node-fetch/externals.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/ts3.7/index.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/form-data/index.d.ts"
       ],
       "./node_modules/@types/node/async_hooks.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -1407,6 +1459,34 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
+      "./node_modules/@types/yargs-parser/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/yargs/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/yargs-parser/index.d.ts"
+      ],
+      "./node_modules/form-data/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/ts3.7/index.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/startable/dist/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
@@ -1434,13 +1514,17 @@
         "./node_modules/startable/dist/primitive.d.ts"
       ],
       "./src/cli.ts": [
-        "./node_modules/@types/minimist/index.d.ts",
+        "./node_modules/@types/node-fetch/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/@types/yargs/index.d.ts",
+        "./src/config.ts",
+        "./src/controller.ts"
       ],
       "./src/config.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -1454,10 +1538,12 @@
         "./node_modules/@types/node/child_process.d.ts",
         "./node_modules/@types/node/events.d.ts",
         "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/path.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/url.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/startable/dist/index.d.ts",
         "./src/config.ts",
@@ -1488,6 +1574,15 @@
         "./node_modules/startable/dist/index.d.ts",
         "./src/controller.ts",
         "./src/interfaces.ts"
+      ],
+      "./src/index.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./src/controller.ts"
       ],
       "./src/interfaces.ts": [
         "./node_modules/@types/node/child_process.d.ts",
@@ -1842,14 +1937,6 @@
         "./node_modules/@types/node/ts3.7/index.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
-      "./node_modules/@types/bluebird/index.d.ts": [
-        "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/process.d.ts",
-        "./node_modules/@types/node/ts3.2/fs.d.ts",
-        "./node_modules/@types/node/ts3.2/process.d.ts",
-        "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
-      ],
       "./node_modules/@types/body-parser/index.d.ts": [
         "./node_modules/@types/connect/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
@@ -1859,6 +1946,15 @@
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/ts3.7/index.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/chai-as-promised/index.d.ts": [
+        "./node_modules/@types/chai/index.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@types/chai/index.d.ts": [
@@ -2039,6 +2135,27 @@
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/node-fetch/externals.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/node-fetch/index.d.ts": [
+        "./node_modules/@types/node-fetch/externals.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/ts3.7/index.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/form-data/index.d.ts"
       ],
       "./node_modules/@types/node/async_hooks.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -2584,6 +2701,34 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts"
       ],
+      "./node_modules/@types/yargs-parser/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
+      "./node_modules/@types/yargs/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/yargs-parser/build/index.cjs.d.ts"
+      ],
+      "./node_modules/form-data/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/http.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/ts3.7/index.d.ts",
+        "./node_modules/@types/node/util.d.ts"
+      ],
       "./node_modules/startable/dist/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
@@ -2619,9 +2764,8 @@
         "./src/controller.ts",
         "./src/interfaces.ts"
       ],
-      "./src/interfaces.ts": [
-        "./node_modules/@types/node/child_process.d.ts",
-        "./node_modules/startable/dist/index.d.ts"
+      "./src/index.ts": [
+        "./src/controller.ts"
       ],
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -2946,8 +3090,8 @@
     },
     "semanticDiagnosticsPerFile": [
       "./node_modules/@types/accepts/index.d.ts",
-      "./node_modules/@types/bluebird/index.d.ts",
       "./node_modules/@types/body-parser/index.d.ts",
+      "./node_modules/@types/chai-as-promised/index.d.ts",
       "./node_modules/@types/chai/index.d.ts",
       "./node_modules/@types/color-name/index.d.ts",
       "./node_modules/@types/connect/index.d.ts",
@@ -2966,6 +3110,8 @@
       "./node_modules/@types/mime/index.d.ts",
       "./node_modules/@types/minimatch/index.d.ts",
       "./node_modules/@types/minimist/index.d.ts",
+      "./node_modules/@types/node-fetch/externals.d.ts",
+      "./node_modules/@types/node-fetch/index.d.ts",
       "./node_modules/@types/node/async_hooks.d.ts",
       "./node_modules/@types/node/base.d.ts",
       "./node_modules/@types/node/buffer.d.ts",
@@ -3022,6 +3168,9 @@
       "./node_modules/@types/qs/index.d.ts",
       "./node_modules/@types/range-parser/index.d.ts",
       "./node_modules/@types/serve-static/index.d.ts",
+      "./node_modules/@types/yargs-parser/index.d.ts",
+      "./node_modules/@types/yargs/index.d.ts",
+      "./node_modules/form-data/index.d.ts",
       "./node_modules/startable/dist/index.d.ts",
       "./node_modules/startable/dist/primitive.d.ts",
       "./node_modules/startable/dist/startable.d.ts",
@@ -3030,6 +3179,7 @@
       "./src/controller.ts",
       "./src/daemon.ts",
       "./src/getInfo.ts",
+      "./src/index.ts",
       "./src/interfaces.ts",
       "./src/soulmate.ts",
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts",

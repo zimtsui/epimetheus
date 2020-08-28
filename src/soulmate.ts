@@ -1,6 +1,6 @@
 import { Startable, LifePeriod } from 'startable';
 import { STOP_TIMEOUT } from './config';
-import path from 'path';
+import { resolve } from 'path';
 
 if (process.env.epimetheus === 'false') process.env.epimetheus = '';
 else if (process.env.epimetheus === 'FALSE') process.env.epimetheus = '';
@@ -15,7 +15,7 @@ interface StartableConsctrutor {
 
 (async () => {
     const Service: StartableConsctrutor = (await import(
-        path.resolve(process.cwd(), process.argv[2])
+        resolve(process.cwd(), process.argv[2])
     )).default;
     const service = new Service();
     service.start((err?: Error) => {
@@ -30,7 +30,7 @@ interface StartableConsctrutor {
             },
             STOP_TIMEOUT,
         ).unref();
-        service.stopped
+        service.stopped!
             .catch(() => { })
             .then(() => {
                 if (process.env.epimetheus) process.disconnect();

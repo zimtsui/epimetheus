@@ -8,8 +8,3 @@ export interface Config {
     args: string[];
     nodeArgs: string[];
 }
-
-export interface Message {
-    event: LifePeriod;
-    arg: Serializable;
-}

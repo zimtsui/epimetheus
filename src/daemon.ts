@@ -16,7 +16,7 @@ router.post('/start', async (ctx, next) => {
     const ctrler = new Controller(config);
     ctrlers.add(ctrler);
     await ctrler.start(err => {
-        ctrler.stopped.then(() => {
+        ctrler.stopped!.then(() => {
             if (ctrler.shouldBeRunning) ctrler.start();
         });
     }).then(() => {

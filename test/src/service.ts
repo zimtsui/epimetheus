@@ -1,12 +1,13 @@
 import Startable from 'startable';
-import Bluebird from 'bluebird';
-const { delay } = Bluebird;
+import { Server } from 'net';
+import { promisify } from 'util';
+const sleep = promisify(setTimeout);
 
 class Service extends Startable {
-    private timer!: NodeJS.Timer;
+    private timer!: Server;
 
     protected async _start() {
-        this.timer = setTimeout(() => { }, 1000000);
+        this.timer = new Server().listen();
         switch (process.argv[3]) {
             case 'normal': return; break;
             case 'self stop':
@@ -24,7 +25,7 @@ class Service extends Startable {
         }
     }
     protected async _stop() {
-        clearTimeout(this.timer);
+        this.timer.close();
         switch (process.argv[3]) {
             case 'normal': return; break;
             case 'self stop': return; break;
