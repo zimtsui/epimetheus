@@ -11,6 +11,7 @@ class Controller extends Startable {
         super();
         this.config = config;
         this.shouldBeRunning = true;
+        this.reusable = true;
     }
     async _start() {
         this.subp = fork(resolve(dirname(fileURLToPath(import.meta.url)), './soulmate.js'), [this.config.servicePath, ...this.config.args], {

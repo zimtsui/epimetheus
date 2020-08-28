@@ -15,8 +15,8 @@ yargs
         describe: 'path of the script',
         type: 'string',
     });
-}, args => {
-    return fetch(`http://localhost:${PORT}/start`, {
+}, async (args) => {
+    const res = await fetch(`http://localhost:${PORT}/start`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
@@ -27,10 +27,14 @@ yargs
             nodeArgs: ['--experimental-specifier-resolution=node'],
         }),
     });
+    if (!res.ok)
+        throw new Error(`${res.status}: ${res.statusText}`);
 }).command('stop <name>', 'stop a daemon', yargs => {
-}, args => {
+}, async (args) => {
     const url = new URL(`http://localhost:${PORT}/stop?name=${args.name}`).href;
-    return fetch(url);
+    const res = await fetch(url);
+    if (!res.ok)
+        throw new Error(`${res.status}: ${res.statusText}`);
 }).command('run <name>', 'start a script synchronously', yargs => {
     yargs
         .positional('name', {

@@ -15,11 +15,13 @@ router.post('/start', async (ctx, next) => {
     const config: Config = ctx.request.body;
     const ctrler = new Controller(config);
     ctrlers.add(ctrler);
-    await ctrler.start(err => {
-        ctrler.stopped!.then(() => {
-            if (ctrler.shouldBeRunning) ctrler.start();
-        });
-    }).then(() => {
+    async function onStop(err?: Error) {
+        if (await ctrler.started!.then(() => true, () => false))
+            ctrler.stopped!.then(() => {
+                if (ctrler.shouldBeRunning) ctrler.start(onStop).catch(console.error);
+            }, err => { });
+    }
+    await ctrler.start(onStop).then(() => {
         ctx.status = 200;
     }, err => {
         ctrlers.delete(ctrler);
@@ -28,14 +30,14 @@ router.post('/start', async (ctx, next) => {
 });
 
 router.get('/stop', async (ctx, next) => {
-    const name = <string>ctx.params.name;
+    const name = <string>ctx.query.name;
     const ctrler = [...ctrlers].find(controller => controller.config.name === name);
     if (ctrler) {
         ctrler.shouldBeRunning = false;
-        await ctrler.stop();
+        await ctrler.stop().catch(console.error);
         ctx.status = 200;
     } else {
-        ctx.body = 404;
+        ctx.status = 404;
     }
 });
 

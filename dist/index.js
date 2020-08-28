@@ -1,2 +1,2 @@
-export * from './controller';
+"use strict";
 //# sourceMappingURL=index.js.map

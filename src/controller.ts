@@ -15,6 +15,7 @@ class Controller extends Startable {
 
     constructor(public config: Config) {
         super();
+        this.reusable = true;
     }
 
     protected async _start() {

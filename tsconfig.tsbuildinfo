@@ -512,12 +512,12 @@
         "affectsGlobalScope": false
       },
       "./src/controller.ts": {
-        "version": "0fa9cbde9bfd1ef4a12390393101dbde10ff278960a08ad2e3d79e397fad587d",
+        "version": "746c3ac2f220f914facc017d73a86443b225702e33e3ed7f2560ebe4880dc0ee",
         "signature": "00b7c876278245f0ff5b3a7876312dc3321b62307439a9db95ee49fff0e85541",
         "affectsGlobalScope": false
       },
       "./src/cli.ts": {
-        "version": "028e5dd527672c09f16ce2035059636f031e280768e27588a51115987d225695",
+        "version": "380043186117acdb6fa3a6754d28508d6d13273ce2388b1771b7de2834028a26",
         "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
         "affectsGlobalScope": false
       },
@@ -617,13 +617,13 @@
         "affectsGlobalScope": false
       },
       "./src/daemon.ts": {
-        "version": "c923924a2328a170fef0e42df64c9318b11458cec597c6d4b71a13cdb09fb910",
+        "version": "fef147ea729e8e739d1cef5d764828a196b20b7315054c345e862c23d5f6da04",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
-        "version": "ab2e9426de99e27b1fa4f2d2971a833812ce50e920f1b5f55515b663de274ad3",
-        "signature": "05af4593e7bb6686a6c6e67c620f1af105b2c4351c235b940363cfda3edf7d89",
+        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "affectsGlobalScope": false
       },
       "./src/soulmate.ts": {
@@ -1581,8 +1581,7 @@
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./src/controller.ts"
+        "./node_modules/@types/node/util.d.ts"
       ],
       "./src/interfaces.ts": [
         "./node_modules/@types/node/child_process.d.ts",
@@ -2763,9 +2762,6 @@
         "./node_modules/startable/dist/index.d.ts",
         "./src/controller.ts",
         "./src/interfaces.ts"
-      ],
-      "./src/index.ts": [
-        "./src/controller.ts"
       ],
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
         "./node_modules/@types/node/fs.d.ts",

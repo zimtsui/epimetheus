@@ -1,5 +1,5 @@
 import { ExecutionContext } from 'ava';
-import { Controller } from '../../dist/index';
+import { Controller } from '../../dist/controller';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
