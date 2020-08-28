@@ -1,4 +1,4 @@
-import { testSoulmateNormal, testSoulmateSelfStop, testSoulmateFailed, testSoulmateBroken, testSoulmateSelfStopBroken, } from './test-soulmate';
+import { testSoulmateNormal, testSoulmateSelfStop, testSoulmateFailed, testSoulmateBroken, testSoulmateSelfStopBroken, } from './test-invokee';
 import { testControllerNormal, testControllerSelfStop, testControllerFailed, testControllerBroken, testControllerSelfStopBroken, } from './test-controller';
 import test from 'ava';
 test('soulmate normal', testSoulmateNormal);

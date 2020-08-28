@@ -4,8 +4,7 @@ import fetch from 'node-fetch';
 import { PORT } from './config';
 import { URL } from 'url';
 import Controller from './controller';
-yargs
-    .command('start <name>', 'start a script as a daemon', yargs => {
+yargs.command('start <name>', 'start a script as a daemon', yargs => {
     yargs
         .positional('name', {
         type: 'string',
@@ -66,5 +65,19 @@ yargs
             console.error(err);
         console.log('stopping...');
     }).catch(console.error);
+}).command('list [name]', 'show status of processes', yargs => {
+    yargs
+        .positional('name', {
+        type: 'string',
+        describe: 'name of the process',
+    });
+}, async (args) => {
+    const url = new URL(args.name
+        ? `http://localhost:${PORT}/list?name=${args.name}`
+        : `http://localhost:${PORT}/list?`).href;
+    const res = await fetch(url);
+    if (!res.ok)
+        throw new Error(`${res.status}: ${res.statusText}`);
+    console.log(await res.json());
 }).parse();
 //# sourceMappingURL=cli.js.map

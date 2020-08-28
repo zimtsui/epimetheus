@@ -9,7 +9,7 @@ import { promisify } from 'util';
 const sleep = promisify(setTimeout);
 
 const packagePath = resolve(fileURLToPath(dirname(import.meta.url)), '../..');
-const soulmatePath = resolve(packagePath, './dist/soulmate.js');
+const soulmatePath = resolve(packagePath, './dist/invokee.js');
 const servicePath = resolve(packagePath, './test/build/service.js');
 const workingDirPath = resolve(packagePath, './test/build');
 const nodeArg = '--experimental-specifier-resolution=node';

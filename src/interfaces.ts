@@ -1,6 +1,3 @@
-import { LifePeriod } from 'startable';
-import { Serializable } from 'child_process';
-
 export interface Config {
     name: string;
     servicePath: string;

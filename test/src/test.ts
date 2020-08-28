@@ -4,7 +4,7 @@ import {
     testSoulmateFailed,
     testSoulmateBroken,
     testSoulmateSelfStopBroken,
-} from './test-soulmate';
+} from './test-invokee';
 import {
     testControllerNormal,
     testControllerSelfStop,
