@@ -18,37 +18,32 @@ yargs.command(
                 describe: 'path of the script',
                 type: 'string',
             });
-    }, async args => {
-        try {
-            const res = await fetch(`http://localhost:${PORT}/start`, {
-                method: 'post',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: args.name,
-                    servicePath: args.path,
-                    cwd: process.cwd(),
-                    args: [],
-                    nodeArgs: ['--experimental-specifier-resolution=node'],
-                }),
-            });
-            if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    }, args => (async () => {
+        const res = await fetch(`http://localhost:${PORT}/start`, {
+            method: 'post',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({
+                name: args.name,
+                servicePath: args.path,
+                cwd: process.cwd(),
+                args: [],
+                nodeArgs: ['--experimental-specifier-resolution=node'],
+            }),
+        });
+        if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+    })().catch(console.error)
 ).command(
-    'stop <name>',
+    'stop [name]',
     'stop a daemon',
     yargs => {
-    }, async args => {
-        try {
-            const url = new URL(`http://localhost:${PORT}/stop?name=${args.name}`).href;
-            const res = await fetch(url);
-            if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    }, args => (async () => {
+        const url = new URL(args.name
+            ? `http://localhost:${PORT}/stop?name=${args.name}`
+            : `http://localhost:${PORT}/stop`
+        ).href;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+    })().catch(console.error)
 ).command(
     'run <name>',
     'start a script synchronously',
@@ -62,31 +57,28 @@ yargs.command(
                 describe: 'path of the script',
                 type: 'string',
             });
-    }, args => {
-        try {
-            const ctrler = new Controller({
-                name: <string>args.name,
-                servicePath: <string>args.path,
-                cwd: process.cwd(),
-                args: [],
-                nodeArgs: ['--experimental-specifier-resolution=node'],
-            });
+    }, args => (async () => {
+        const ctrler = new Controller({
+            name: <string>args.name,
+            servicePath: <string>args.path,
+            cwd: process.cwd(),
+            args: [],
+            nodeArgs: ['--experimental-specifier-resolution=node'],
+        });
+        process.once('SIGINT', () => {
+            console.log('\nreceived SIGINT');
+            console.log('send SIGINT again to terminate immediately.');
             process.once('SIGINT', () => {
-                console.log('\nreceived SIGINT');
-                console.log('send SIGINT again to terminate immediately.');
-                process.once('SIGINT', () => {
-                    process.exit(1);
-                });
-                ctrler.stop().catch(console.error);
+                process.exit(1);
             });
-            return ctrler.start(err => {
-                if (err) console.error(err);
-                console.log('stopping...');
-            });
-        } catch (err) {
-            console.error(err);
-        }
-    }
+            ctrler.stop().catch(console.error);
+        });
+        console.log('starting...');
+        return ctrler.start(err => {
+            if (err) console.error(err);
+            console.log('stopping...');
+        }).then(() => console.log('started.'));
+    })().catch(console.error)
 ).command(
     'list [name]',
     'show status of processes',
@@ -96,17 +88,13 @@ yargs.command(
                 type: 'string',
                 describe: 'name of the process',
             });
-    }, async args => {
-        try {
-            const url = new URL(args.name
-                ? `http://localhost:${PORT}/list?name=${args.name}`
-                : `http://localhost:${PORT}/list?`
-            ).href;
-            const res = await fetch(url);
-            if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
-            console.log(await res.json());
-        } catch (err) {
-            console.error(err);
-        }
-    }
+    }, args => (async () => {
+        const url = new URL(args.name
+            ? `http://localhost:${PORT}/list?name=${args.name}`
+            : `http://localhost:${PORT}/list?`
+        ).href;
+        const res = await fetch(url);
+        if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+        console.log(await res.json());
+    })().catch(console.error)
 ).parse();

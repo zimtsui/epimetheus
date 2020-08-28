@@ -20,7 +20,7 @@ class Controller extends Startable {
 
     protected async _start() {
         this.subp = fork(
-            resolve(dirname(fileURLToPath(import.meta.url)), './soulmate.js'),
+            resolve(dirname(fileURLToPath(import.meta.url)), './invokee.js'),
             [this.config.servicePath, ...this.config.args],
             {
                 cwd: this.config.cwd,

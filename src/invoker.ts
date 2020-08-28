@@ -32,14 +32,22 @@ router.post('/start', async (ctx, next) => {
 
 router.get('/stop', async (ctx, next) => {
     const name = <string>ctx.query.name;
-    const ctrler = [...ctrlers].find(ctrler => ctrler.config.name === name);
-    if (ctrler) {
+    let ctrlersToStop: Controller[];
+    if (name) {
+        const ctrler = [...ctrlers].find(ctrler => ctrler.config.name === name);
+        if (ctrler) ctrlersToStop = [ctrler];
+        else {
+            ctx.status = 404;
+            return;
+        }
+    } else ctrlersToStop = [...ctrlers];
+
+    await Promise.all(ctrlersToStop.map(async ctrler => {
         ctrler.shouldBeRunning = false;
         await ctrler.stop().catch(console.error);
-        ctx.status = 204;
-    } else {
-        ctx.status = 404;
-    }
+        ctrlers.delete(ctrler);
+    }));
+    ctx.status = 204;
 });
 
 router.get('/list', (ctx, next) => {
