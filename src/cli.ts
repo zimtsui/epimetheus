@@ -19,27 +19,35 @@ yargs.command(
                 type: 'string',
             });
     }, async args => {
-        const res = await fetch(`http://localhost:${PORT}/start`, {
-            method: 'post',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({
-                name: args.name,
-                servicePath: args.path,
-                cwd: process.cwd(),
-                args: [],
-                nodeArgs: ['--experimental-specifier-resolution=node'],
-            }),
-        });
-        if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+        try {
+            const res = await fetch(`http://localhost:${PORT}/start`, {
+                method: 'post',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({
+                    name: args.name,
+                    servicePath: args.path,
+                    cwd: process.cwd(),
+                    args: [],
+                    nodeArgs: ['--experimental-specifier-resolution=node'],
+                }),
+            });
+            if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+        } catch (err) {
+            console.error(err);
+        }
     }
 ).command(
     'stop <name>',
     'stop a daemon',
     yargs => {
     }, async args => {
-        const url = new URL(`http://localhost:${PORT}/stop?name=${args.name}`).href;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+        try {
+            const url = new URL(`http://localhost:${PORT}/stop?name=${args.name}`).href;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+        } catch (err) {
+            console.error(err);
+        }
     }
 ).command(
     'run <name>',
@@ -55,25 +63,29 @@ yargs.command(
                 type: 'string',
             });
     }, args => {
-        const ctrler = new Controller({
-            name: <string>args.name,
-            servicePath: <string>args.path,
-            cwd: process.cwd(),
-            args: [],
-            nodeArgs: ['--experimental-specifier-resolution=node'],
-        });
-        process.once('SIGINT', () => {
-            console.log('\nreceived SIGINT');
-            console.log('send SIGINT again to terminate immediately.');
-            process.once('SIGINT', () => {
-                process.exit(1);
+        try {
+            const ctrler = new Controller({
+                name: <string>args.name,
+                servicePath: <string>args.path,
+                cwd: process.cwd(),
+                args: [],
+                nodeArgs: ['--experimental-specifier-resolution=node'],
             });
-            ctrler.stop().catch(console.error);
-        });
-        return ctrler.start(err => {
-            if (err) console.error(err);
-            console.log('stopping...');
-        }).catch(console.error);
+            process.once('SIGINT', () => {
+                console.log('\nreceived SIGINT');
+                console.log('send SIGINT again to terminate immediately.');
+                process.once('SIGINT', () => {
+                    process.exit(1);
+                });
+                ctrler.stop().catch(console.error);
+            });
+            return ctrler.start(err => {
+                if (err) console.error(err);
+                console.log('stopping...');
+            });
+        } catch (err) {
+            console.error(err);
+        }
     }
 ).command(
     'list [name]',
@@ -85,12 +97,16 @@ yargs.command(
                 describe: 'name of the process',
             });
     }, async args => {
-        const url = new URL(args.name
-            ? `http://localhost:${PORT}/list?name=${args.name}`
-            : `http://localhost:${PORT}/list?`
-        ).href;
-        const res = await fetch(url);
-        if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
-        console.log(await res.json());
+        try {
+            const url = new URL(args.name
+                ? `http://localhost:${PORT}/list?name=${args.name}`
+                : `http://localhost:${PORT}/list?`
+            ).href;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+            console.log(await res.json());
+        } catch (err) {
+            console.error(err);
+        }
     }
 ).parse();

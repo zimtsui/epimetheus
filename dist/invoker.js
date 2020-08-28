@@ -20,7 +20,7 @@ router.post('/start', async (ctx, next) => {
             }, err => { });
     }
     await ctrler.start(onStop).then(() => {
-        ctx.status = 200;
+        ctx.status = 204;
     }, err => {
         ctrlers.delete(ctrler);
         ctx.status = 404;
@@ -28,18 +28,23 @@ router.post('/start', async (ctx, next) => {
 });
 router.get('/stop', async (ctx, next) => {
     const name = ctx.query.name;
-    const ctrler = [...ctrlers].find(controller => controller.config.name === name);
+    const ctrler = [...ctrlers].find(ctrler => ctrler.config.name === name);
     if (ctrler) {
         ctrler.shouldBeRunning = false;
         await ctrler.stop().catch(console.error);
-        ctx.status = 200;
+        ctx.status = 204;
     }
     else {
         ctx.status = 404;
     }
 });
 router.get('/list', (ctx, next) => {
-    ctx.body = [...ctrlers].map(getInfo);
+    if (ctx.query.name) {
+        const ctrler = [...ctrlers].find(ctrler => ctrler.config.name === ctx.query.name);
+        ctx.body = ctrler ? getInfo(ctrler) : null;
+    }
+    else
+        ctx.body = [...ctrlers].map(getInfo);
 });
 daemon.use(bodyParser());
 daemon.use(router.routes());

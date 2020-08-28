@@ -517,7 +517,7 @@
         "affectsGlobalScope": false
       },
       "./src/cli.ts": {
-        "version": "a8d8079a362e955b513788baae81bc62fd8d30b53f72832e9a6298c24c12cb82",
+        "version": "c7fb5fc477251704fe4075f1e3cb5d710c3a30c67012bfdd5d9ee68b8920bbe1",
         "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
         "affectsGlobalScope": false
       },
@@ -627,7 +627,7 @@
         "affectsGlobalScope": false
       },
       "./src/invoker.ts": {
-        "version": "23e4e4104dbc7a5a4aa7bdf0b56543079735bdf48651b1ac340052d5df987b6c",
+        "version": "1d25f4993110fb0e9a15dc2a476788aa5d140db73f2a39e2e7a11a1f3cfcabe5",
         "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
         "affectsGlobalScope": false
       },
@@ -2713,7 +2713,7 @@
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
-        "./node_modules/yargs-parser/build/index.cjs.d.ts"
+        "./node_modules/@types/yargs-parser/index.d.ts"
       ],
       "./node_modules/form-data/index.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
