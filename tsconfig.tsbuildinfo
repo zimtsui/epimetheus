@@ -617,8 +617,8 @@
         "affectsGlobalScope": false
       },
       "./src/daemon.ts": {
-        "version": "fef147ea729e8e739d1cef5d764828a196b20b7315054c345e862c23d5f6da04",
-        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "version": "23e4e4104dbc7a5a4aa7bdf0b56543079735bdf48651b1ac340052d5df987b6c",
+        "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {

@@ -10,7 +10,10 @@
         "build-test": "tsc -b ./test/",
         "test": "tsc -b ./test/ && ava ./test/build/test.js"
     },
-    "bin": "./dist/cli.js",
+    "bin": {
+        "epi-daemon": "./dist/daemon.js",
+        "epi-cli": "./dist/cli.js"
+    },
     "author": "Zim",
     "license": "MIT",
     "dependencies": {

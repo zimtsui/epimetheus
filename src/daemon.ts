@@ -1,3 +1,4 @@
+#!/usr/bin/env -S node --experimental-specifier-resolution=node
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
