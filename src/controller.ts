@@ -28,7 +28,7 @@ class Controller extends Startable {
                     ...process.env,
                     epimetheus: 'true',
                 },
-                stdio: ['ignore', this.config.stdout, this.config.stderr, 'ipc'],
+                stdio: ['ignore', this.config.stdout!, this.config.stderr!, 'ipc'],
             }
         );
         this.subp.on('message', (message: LifePeriod) => {

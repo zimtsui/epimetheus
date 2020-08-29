@@ -9,12 +9,14 @@ export interface ConfigBase {
     nodeArgs: string[];
 }
 export interface SerializableConfig extends ConfigBase {
-    stdout: string;
-    stderr: string;
+    outFilePath: string;
+    errFilePath: string;
 }
 export interface ControllerConfig extends ConfigBase {
-    stdout: Writable | 'ignore' | 'inherit';
-    stderr: Writable | 'ignore' | 'inherit';
+    outFilePath?: string;
+    errFilePath?: string;
+    stdout?: Writable | 'ignore' | 'inherit';
+    stderr?: Writable | 'ignore' | 'inherit';
 }
 export interface Info extends ConfigBase {
     status: LifePeriod;

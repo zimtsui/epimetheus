@@ -15,8 +15,8 @@ export interface SerializableConfig extends ConfigBase {
 }
 
 export interface ControllerConfig extends ConfigBase {
-    createStdout?: () => Writable;
-    createStderr?: () => Writable;
+    outFilePath?: string;
+    errFilePath?: string;
     stdout?: Writable | 'ignore' | 'inherit';
     stderr?: Writable | 'ignore' | 'inherit';
 }

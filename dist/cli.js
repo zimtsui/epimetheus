@@ -31,10 +31,10 @@ const options = {
         alias: 'c',
         type: 'string',
     },
-    stdout: {
+    outFilePath: {
         type: 'string',
     },
-    stderr: {
+    errFilePath: {
         type: 'string',
     }
 };
@@ -43,10 +43,10 @@ function configParser(path) {
     config.path = resolve(dirname(path), config.path);
     if (config.cwd)
         config.cwd = resolve(dirname(path), config.cwd);
-    if (config.stdout)
-        config.stdout = resolve(dirname(path), config.stdout);
-    if (config.stderr)
-        config.stderr = resolve(dirname(path), config.stderr);
+    if (config.outFilePath)
+        config.outFilePath = resolve(dirname(path), config.outFilePath);
+    if (config.errFilePath)
+        config.errFilePath = resolve(dirname(path), config.errFilePath);
     return config;
 }
 function checker(args) {
@@ -61,7 +61,7 @@ yargs
     .parserConfiguration({
     "strip-aliased": true,
     "strip-dashed": true,
-}).command('start [name]', 'start a script as a daemon', yargs => {
+}).command('register [name]', 'register a script as a daemon', yargs => {
     yargs
         .positional('name', {
         type: 'string',
@@ -71,31 +71,45 @@ yargs
         .config('config', configParser)
         .check(checker);
 }, args => (async () => {
-    if (!args.stdout)
-        args.stdout = resolve(process.env.HOME, `./.epimetheus/log/${args.name}.log`);
-    if (!args.stderr)
-        args.stderr = resolve(process.env.HOME, `./.epimetheus/log/${args.name}.log`);
+    if (!args.outFilePath)
+        args.outFilePath = resolve(process.env.HOME, `./.epimetheus/log/${args.name}.log`);
+    if (!args.errFilePath)
+        args.errFilePath = resolve(process.env.HOME, `./.epimetheus/log/${args.name}.log`);
     const config = {
         name: args.name,
         path: resolve(process.cwd(), args.path),
         cwd: resolve(process.cwd(), args.cwd),
         args: args.args,
         nodeArgs: args.nodeArgs,
-        stdout: resolve(process.cwd(), args.stdout),
-        stderr: resolve(process.cwd(), args.stderr),
+        outFilePath: resolve(process.cwd(), args.outFilePath),
+        errFilePath: resolve(process.cwd(), args.errFilePath),
     };
-    const res = await fetch(`http://localhost:${PORT}/start`, {
+    const res = await fetch(`http://localhost:${PORT}/register`, {
         method: 'post',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(config),
     });
     if (!res.ok)
         throw new Error(`${res.status}: ${res.statusText}`);
-})().catch(console.error)).command('stop [name]', 'stop a daemon', yargs => {
+})().catch(console.error)).command('start <name>', 'start a registered daemon', yargs => {
+}, args => (async () => {
+    const url = new URL(`http://localhost:${PORT}/start?name=${args.name}`).href;
+    const res = await fetch(url);
+    if (!res.ok)
+        throw new Error(`${res.status}: ${res.statusText}`);
+})().catch(console.error)).command('stop [name]', 'stop a/all registered daemons', yargs => {
 }, args => (async () => {
     const url = new URL(args.name
         ? `http://localhost:${PORT}/stop?name=${args.name}`
         : `http://localhost:${PORT}/stop`).href;
+    const res = await fetch(url);
+    if (!res.ok)
+        throw new Error(`${res.status}: ${res.statusText}`);
+})().catch(console.error)).command('delete [name]', 'delete a/all registries', yargs => {
+}, args => (async () => {
+    const url = new URL(args.name
+        ? `http://localhost:${PORT}/delete?name=${args.name}`
+        : `http://localhost:${PORT}/delete`).href;
     const res = await fetch(url);
     if (!res.ok)
         throw new Error(`${res.status}: ${res.statusText}`);

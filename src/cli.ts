@@ -33,7 +33,7 @@ const options = {
         alias: 'c',
         type: <'string'>'string',
     },
-    stdout: {
+    outFilePath: {
         type: <'string'>'string',
     },
     errFilePath: {
@@ -112,7 +112,7 @@ yargs
         })().catch(console.error)
     ).command(
         'stop [name]',
-        'stop a/all registered daemon(s)',
+        'stop a/all registered daemons',
         yargs => {
         }, args => (async () => {
             const url = new URL(args.name
@@ -123,11 +123,14 @@ yargs
             if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
         })().catch(console.error)
     ).command(
-        'delete <name>',
-        'delete a registry',
+        'delete [name]',
+        'delete a/all registries',
         yargs => {
         }, args => (async () => {
-            const url = new URL(`http://localhost:${PORT}/delete?name=${args.name}`).href;
+            const url = new URL(args.name
+                ? `http://localhost:${PORT}/delete?name=${args.name}`
+                : `http://localhost:${PORT}/delete`
+            ).href;
             const res = await fetch(url);
             if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
         })().catch(console.error)

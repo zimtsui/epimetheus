@@ -13,37 +13,60 @@ const { ensureFileSync } = fse;
 const server = new Koa();
 const router = new Router();
 const ctrlers = new Set();
-router.post('/start', async (ctx, next) => {
-    const sConfig = ctx.request.body;
-    ensureFileSync(sConfig.stdout);
-    ensureFileSync(sConfig.stderr);
-    const config = {
-        ...sConfig,
-        stdout: createWriteStream(sConfig.stdout, { flags: 'a' }),
-        stderr: createWriteStream(sConfig.stderr, { flags: 'a' }),
-    };
-    await once(config.stdout, 'open');
-    await once(config.stderr, 'open');
-    const ctrler = new Controller(config);
-    ctrlers.add(ctrler);
-    async function onStop(err) {
-        config.stderr.write(`${format(err)}\n`);
-        if (await ctrler.started.then(() => true, () => false))
-            ctrler.stopped.then(() => {
-                if (ctrler.shouldBeRunning)
-                    ctrler.start(onStop).catch(() => { });
-            }, err => { });
+router
+    .post('/register', async (ctx, next) => {
+    const config = ctx.request.body;
+    if (![...ctrlers].find(ctrler => ctrler.config.name === config.name)) {
+        ctx.status = 201;
+        const ctrler = new Controller(config);
+        ctrlers.add(ctrler);
     }
-    await ctrler.start(onStop).then(() => {
-        ctx.status = 204;
-    }, err => {
-        ctrler.config.stdout.end();
-        ctrler.config.stderr.end();
-        ctrlers.delete(ctrler);
+    else {
+        ctx.status = 405;
+        ctx.message = 'Service already existing.';
+    }
+})
+    .get('/start', async (ctx, next) => {
+    const name = ctx.query.name;
+    const ctrler = [...ctrlers].find(ctrler => ctrler.config.name === name);
+    if (ctrler) {
+        ensureFileSync(ctrler.config.outFilePath);
+        ensureFileSync(ctrler.config.errFilePath);
+        ctrler.config.stdout = createWriteStream(ctrler.config.outFilePath, { flags: 'a' });
+        ctrler.config.stderr = createWriteStream(ctrler.config.errFilePath, { flags: 'a' });
+        await once(ctrler.config.stdout, 'open');
+        await once(ctrler.config.stderr, 'open');
+        function onStop(err) {
+            if (err)
+                ctrler.config.stderr.write(`${format(err)}\n`);
+            ctrler.stopped.then(async () => {
+                if (await ctrler.started.then(() => true, () => false) &&
+                    ctrler.shouldBeRunning)
+                    ctrler.start(onStop).catch(() => { });
+                else {
+                    ctrler.config.stdout.end();
+                    ctrler.config.stderr.end();
+                }
+            }, err => {
+                console.error(err);
+                ctrler.config.stdout.end();
+                ctrler.config.stderr.end();
+            });
+        }
+        await ctrler.start(onStop).then(() => {
+            ctx.status = 204;
+        }, err => {
+            // err 在 onStop() 中处理
+            ctx.status = 503;
+            ctx.message = 'Failed to start.';
+        });
+    }
+    else {
         ctx.status = 404;
-    });
-});
-router.get('/stop', async (ctx, next) => {
+        ctx.message = 'Service not found.';
+    }
+})
+    .get('/stop', async (ctx, next) => {
     const name = ctx.query.name;
     let ctrlersToStop;
     if (name) {
@@ -52,6 +75,7 @@ router.get('/stop', async (ctx, next) => {
             ctrlersToStop = [ctrler];
         else {
             ctx.status = 404;
+            ctx.message = 'Service not found.';
             return;
         }
     }
@@ -59,24 +83,62 @@ router.get('/stop', async (ctx, next) => {
         ctrlersToStop = [...ctrlers];
     await Promise.all(ctrlersToStop.map(async (ctrler) => {
         ctrler.shouldBeRunning = false;
-        await ctrler.stop().catch(console.error);
-        ctrler.config.stdout.end();
-        ctrler.config.stderr.end();
-        ctrlers.delete(ctrler);
-    }));
+        // stop() 的异常在 onStop() 中处理
+        await ctrler.stop();
+    })).catch(err => {
+        ctx.status = 500;
+        ctx.message = 'Failed to stop.';
+        throw err;
+    });
     ctx.status = 204;
-});
-router.get('/list', (ctx, next) => {
+})
+    .get('/delete', async (ctx, next) => {
+    const name = ctx.query.name;
+    let ctrlersToDelete;
+    if (name) {
+        const ctrler = [...ctrlers].find(ctrler => ctrler.config.name === name);
+        if (ctrler)
+            ctrlersToDelete = [ctrler];
+        else {
+            ctx.status = 404;
+            ctx.message = 'Service not found.';
+            return;
+        }
+    }
+    else
+        ctrlersToDelete = [...ctrlers];
+    await Promise.all(ctrlersToDelete.map(ctrler => {
+        if (ctrler.lifePeriod === 0 /* CONSTRUCTED */ ||
+            ctrler.lifePeriod === 5 /* STOPPED */ ||
+            ctrler.lifePeriod === 6 /* BROKEN */)
+            ctrlers.delete(ctrler);
+        else
+            throw new Error('a running service cannot be deleted');
+    })).catch((err) => {
+        ctx.status = 405;
+        ctx.message = err.message;
+        throw err;
+    });
+    ctx.status = 204;
+})
+    .get('/list', (ctx, next) => {
     if (ctx.query.name) {
         const ctrler = [...ctrlers].find(ctrler => ctrler.config.name === ctx.query.name);
-        ctx.body = ctrler ? getInfo(ctrler) : null;
+        if (ctrler) {
+            ctx.body = getInfo(ctrler);
+        }
+        else {
+            ctx.status = 404;
+            ctx.message = 'Service not found.';
+        }
     }
     else
         ctx.body = [...ctrlers].map(getInfo);
 });
-server.use(bodyParser());
-server.use(router.routes());
-server.listen(PORT);
+server
+    .use(bodyParser())
+    .use(router.routes())
+    .listen(PORT);
 process.once('SIGINT', () => {
     process.once('SIGINT', () => {
         process.exit(1);
