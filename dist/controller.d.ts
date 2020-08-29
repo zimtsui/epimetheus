@@ -1,8 +1,10 @@
+/// <reference types="node" />
 import { Startable } from 'startable';
+import { ChildProcess } from 'child_process';
 import { Config } from './interfaces';
 declare class Controller extends Startable {
     config: Config;
-    private subp;
+    subp: ChildProcess;
     shouldBeRunning: boolean;
     constructor(config: Config);
     protected _start(): Promise<void>;

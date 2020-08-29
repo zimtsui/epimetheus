@@ -5,7 +5,7 @@ import bodyParser from 'koa-bodyparser';
 import Controller from './controller';
 import { PORT } from './config';
 import getInfo from './getInfo';
-const daemon = new Koa();
+const server = new Koa();
 const router = new Router();
 const ctrlers = new Set();
 router.post('/start', async (ctx, next) => {
@@ -55,7 +55,19 @@ router.get('/list', (ctx, next) => {
     else
         ctx.body = [...ctrlers].map(getInfo);
 });
-daemon.use(bodyParser());
-daemon.use(router.routes());
-daemon.listen(PORT);
+server.use(bodyParser());
+server.use(router.routes());
+server.listen(PORT);
+process.once('SIGINT', () => {
+    process.once('SIGINT', () => {
+        process.exit(1);
+    });
+    console.log('\nreceived SIGINT');
+    console.log('send SIGINT again to terminate immediately.');
+    ctrlers.forEach(ctrler => {
+        ctrler.subp.on('error', console.error);
+        ctrler.subp.kill('SIGKILL');
+    });
+    process.exit(0);
+});
 //# sourceMappingURL=invoker.js.map

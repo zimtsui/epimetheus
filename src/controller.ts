@@ -7,10 +7,9 @@ import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 // TODO: 要考虑 subp.kill() 失败的情况
-// TODO: 要考虑 message 不按顺序来的情况
 
 class Controller extends Startable {
-    private subp!: ChildProcess;
+    public subp!: ChildProcess;
     public shouldBeRunning = true;
 
     constructor(public config: Config) {

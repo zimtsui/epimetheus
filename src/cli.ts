@@ -65,14 +65,17 @@ yargs.command(
             args: [],
             nodeArgs: ['--experimental-specifier-resolution=node'],
         });
+
         process.once('SIGINT', () => {
-            console.log('\nreceived SIGINT');
-            console.log('send SIGINT again to terminate immediately.');
             process.once('SIGINT', () => {
                 process.exit(1);
             });
+            console.log('\nreceived SIGINT');
+            console.log('send SIGINT again to terminate immediately.');
+
             ctrler.stop().catch(console.error);
         });
+
         console.log('starting...');
         return ctrler.start(err => {
             if (err) console.error(err);
