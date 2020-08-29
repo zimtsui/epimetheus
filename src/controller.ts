@@ -2,42 +2,24 @@
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
-import Invoker from './invoker';
-import { SerializableConfig, ControllerConfig, } from './interfaces';
+import { SerializableConfig } from './interfaces';
 import { PORT } from './config';
 import getInfo from './getInfo';
-import { createWriteStream, WriteStream } from 'fs';
-import fse from 'fs-extra';
-import { format } from 'util';
-import { once } from 'events';
 import { LifePeriod } from 'startable';
-const { ensureFileSync } = fse;
+import Recaller from './recaller';
 
 const server = new Koa();
 const router = new Router();
 
-const invokers = new Set<Invoker>();
-
-function isNotRunning(invoker: Invoker) {
-    return (
-        invoker.lifePeriod === LifePeriod.CONSTRUCTED ||
-        invoker.lifePeriod === LifePeriod.STOPPED ||
-        invoker.lifePeriod === LifePeriod.BROKEN
-    ) && !invoker.shouldBeRunning;
-}
-// TODO broken
-
-function isRunning(invoker: Invoker) {
-    return invoker.shouldBeRunning;
-}
+const recallers = new Set<Recaller>();
 
 router
     .post('/register', async (ctx, next) => {
-        const config: ControllerConfig = <SerializableConfig>ctx.request.body;
-        if (![...invokers].find(invoker => invoker.config.name === config.name)) {
+        const config = <SerializableConfig>ctx.request.body;
+        if (![...recallers].find(recaller => recaller.config.name === config.name)) {
             ctx.status = 201;
-            const invoker = new Invoker(config);
-            invokers.add(invoker);
+            const recaller = new Recaller(config);
+            recallers.add(recaller);
         } else {
             ctx.status = 405;
             ctx.message = 'Service already existing.'
@@ -46,49 +28,12 @@ router
 
     .put('/start', async (ctx, next) => {
         const name = <string>ctx.query.name;
-        const invoker = [...invokers].find(invoker => invoker.config.name === name);
-        if (invoker) {
-            if (isRunning(invoker)) {
-                ctx.status = 208;
-                ctx.message = 'Already started.'
-                return;
-            }
-
-            ensureFileSync(invoker.config.outFilePath!);
-            ensureFileSync(invoker.config.errFilePath!);
-            invoker.config.stdout = createWriteStream(invoker.config.outFilePath!, { flags: 'a' });
-            invoker.config.stderr = createWriteStream(invoker.config.errFilePath!, { flags: 'a' });
-            await once(<WriteStream>invoker.config.stdout, 'open');
-            await once(<WriteStream>invoker.config.stderr, 'open');
-
-            function onStopping(err?: Error) {
-                // 处理所有 start() 异常和运行中异常
-                if (err) (<WriteStream>invoker!.config.stderr).write(`${format(err)}\n`);
-                invoker!.stopped!.then(async () => {
-                    if (
-                        await invoker!.started!.then(() => true, () => false) &&
-                        invoker!.shouldBeRunning
-                    )
-                        // start() 异常在 onStopping() 中处理
-                        invoker!.start(onStopping).catch(() => { });
-                    else {
-                        (<WriteStream>invoker!.config.stdout).end();
-                        (<WriteStream>invoker!.config.stderr).end();
-                        invoker!.shouldBeRunning = false;
-                    }
-                }, err => {
-                    // 处理所有 stop() 异常
-                    (<WriteStream>invoker!.config.stderr).write(`${format(err)}\n`);
-                    (<WriteStream>invoker!.config.stdout).end();
-                    (<WriteStream>invoker!.config.stderr).end();
-                    invoker!.shouldBeRunning = false;
-                });
-            }
-            invoker.shouldBeRunning = true;
-            await invoker.start(onStopping).then(() => {
+        const recaller = [...recallers].find(recaller => recaller.config.name === name);
+        if (recaller) {
+            await recaller.start().then(() => {
                 ctx.status = 204;
             }, err => {
-                // err 在 onStopping() 中处理
+                console.error(err);
                 ctx.status = 503;
                 ctx.message = 'Failed to start.'
             });
@@ -100,65 +45,68 @@ router
 
     .put('/stop', async (ctx, next) => {
         const name = <string>ctx.query.name;
-        let invokersToStop: Invoker[];
+        let recallersToStop: Recaller[];
         if (name) {
-            const invoker = [...invokers].find(invoker => invoker.config.name === name);
-            if (invoker) invokersToStop = [invoker];
+            const recaller = [...recallers].find(invoker => invoker.config.name === name);
+            if (recaller) recallersToStop = [recaller];
             else {
                 ctx.status = 404;
                 ctx.message = 'Service not found.';
                 return;
             }
-        } else invokersToStop = [...invokers];
+        } else recallersToStop = [...recallers];
 
-        await Promise.all(invokersToStop.map(async invoker => {
-            invoker.shouldBeRunning = false;
-            // stop() 的异常在 onStopping() 中处理
+        await Promise.all(recallersToStop.map(async invoker => {
             await invoker.stop();
-        })).catch(err => {
+        })).then(() => {
+            ctx.status = 204;
+        }, err => {
+            console.error(err);
             ctx.status = 500;
             ctx.message = 'Failed to stop.'
-            throw err;
         });
-        ctx.status = 204;
     })
 
     .delete('/delete', async (ctx, next) => {
         const name = <string>ctx.query.name;
-        let invokersToDelete: Invoker[];
+        let recallersToDelete: Recaller[];
         if (name) {
-            const invoker = [...invokers].find(invoker => invoker.config.name === name);
-            if (invoker) invokersToDelete = [invoker];
+            const recaller = [...recallers].find(invoker => invoker.config.name === name);
+            if (recaller) recallersToDelete = [recaller];
             else {
                 ctx.status = 404;
                 ctx.message = 'Service not found.';
                 return;
             }
-        } else invokersToDelete = [...invokers];
+        } else recallersToDelete = [...recallers];
 
-        await Promise.all(invokersToDelete.map(invoker => {
-            if (isNotRunning(invoker)) invokers.delete(invoker);
+        await Promise.all(recallersToDelete.map(recaller => {
+            if (
+                recaller.lifePeriod === LifePeriod.CONSTRUCTED ||
+                recaller.lifePeriod === LifePeriod.STOPPED
+            ) recallers.delete(recaller);
             else throw new Error('a running service cannot be deleted');
-        })).catch((err: Error) => {
+        })).then(() => {
+            ctx.status = 204;
+        }, err => {
+            console.error(err);
             ctx.status = 405;
             ctx.message = err.message;
-            throw err;
         });
-        ctx.status = 204;
     })
 
     .get('/list', (ctx, next) => {
         if (ctx.query.name) {
-            const invoker = [...invokers].find(
-                invoker => invoker.config.name === ctx.query.name
+            const recaller = [...recallers].find(
+                recaller => recaller.config.name === ctx.query.name
             );
-            if (invoker) {
-                ctx.body = getInfo(invoker);
+            if (recaller) {
+                ctx.body = getInfo(recaller);
             } else {
                 ctx.status = 404;
                 ctx.message = 'Service not found.';
             }
-        } else ctx.body = [...invokers].map(getInfo);
+        } else ctx.body = [...recallers].map(getInfo);
     });
 
 server
@@ -172,9 +120,8 @@ process.once('SIGINT', () => {
     });
     console.log('\nreceived SIGINT');
     console.log('send SIGINT again to terminate immediately.');
-    invokers.forEach(invoker => {
-        invoker.subp.on('error', console.error);
-        invoker.subp.kill('SIGKILL');
+    recallers.forEach(recaller => {
+        recaller.kill();
     });
     process.exit(0);
 });

@@ -12,12 +12,11 @@ export interface SerializableConfig extends ConfigBase {
     outFilePath: string;
     errFilePath: string;
 }
-export interface ControllerConfig extends ConfigBase {
-    outFilePath?: string;
-    errFilePath?: string;
-    stdout?: Writable | 'ignore' | 'inherit';
-    stderr?: Writable | 'ignore' | 'inherit';
+export interface InvokerConfig extends ConfigBase {
+    stdout: Writable | 'ignore' | 'inherit';
+    stderr: Writable | 'ignore' | 'inherit';
 }
 export interface Info extends ConfigBase {
-    status: LifePeriod;
+    recallerStatus: LifePeriod;
+    invokerStatus: LifePeriod;
 }

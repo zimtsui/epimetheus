@@ -507,13 +507,13 @@
         "affectsGlobalScope": false
       },
       "./src/interfaces.ts": {
-        "version": "df56ace5129941c5b5433a0728b6d8cf4858989b9e8e626f71539a6e1c83d118",
-        "signature": "7973289f0b6c5a949e01651bf238209b65ebfad4fa863de8400ed8079da10d53",
+        "version": "e5397c6e04ac7f4fd951b5b9b384d516b8e266019e1d15e9a265ab4cfbb2062d",
+        "signature": "0cd24ab7e8b390c9ba92d3615dd20c0404b8b48107384134b8cb99f89ba79436",
         "affectsGlobalScope": false
       },
       "./src/invoker.ts": {
-        "version": "72fd13142da286d8fc3375aa8af1a16d4c58206beecb49399a1f3644576655a3",
-        "signature": "31ead2912281bab9784cb5ab2b0f41c39e93b5b4d7adc5c096e38081fcc24801",
+        "version": "7e60a10ff81812517de03cbc105a47d2cdc7cccfa2b4d67be9a63ed3d573243b",
+        "signature": "6bdbd7863d8064a8995170a0273b15b764280fc0da949048a0a3016f1ab0edcc",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {
@@ -616,13 +616,18 @@
         "signature": "b8d67a816b437cd16692069fa2d9c2255216673fdf9d1bdd6a9d2f23a803796f",
         "affectsGlobalScope": false
       },
+      "./src/recaller.ts": {
+        "version": "488eed6eac0c82b8bc1f787b4fadfe3984e2e36009dd6c8b98cc3ebfde818df5",
+        "signature": "84b2e0c1d15d618698a4d353bf48e1957a37446f3e8a9ecbf9be5a7bee72a62e",
+        "affectsGlobalScope": false
+      },
       "./src/getInfo.ts": {
-        "version": "39c9a38d78c686c2571fd624ff9ddb23dd3f09064ceff31fd3b7a113c2bcdf06",
-        "signature": "a16fc765b16cb71336f93c6f3e12e392709adacf4e576938b33c07fbfcc63739",
+        "version": "55cc3cd25daea044d8fe504d887ee150ef273474c1a452378c8e7a68cfed5032",
+        "signature": "e5ad844b1d2bb604ef4eb6ad691647e4b3b9ada965a4b419aac78d37a56fac1e",
         "affectsGlobalScope": false
       },
       "./src/controller.ts": {
-        "version": "b4a5c229bfeeb04aeb15e32c9c286886751fc53b736b9714d24caad7eec5e996",
+        "version": "b5940abd845e94c9f34e5025bbbe2a85f27d8151e508f440ecfe942d77111e75",
         "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
         "affectsGlobalScope": false
       },
@@ -634,11 +639,6 @@
       "./src/invokee.ts": {
         "version": "5b4e6b903ae0bd7e74ad418e4b02c1f165c1f3d559189102595ba222e962659b",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
-        "affectsGlobalScope": false
-      },
-      "./src/recaller.ts": {
-        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/chai/index.d.ts": {
@@ -1557,11 +1557,9 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./src/controller.ts": [
-        "./node_modules/@types/fs-extra/index.d.ts",
         "./node_modules/@types/koa-bodyparser/index.d.ts",
         "./node_modules/@types/koa-router/index.d.ts",
         "./node_modules/@types/koa/index.d.ts",
-        "./node_modules/@types/node/events.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -1572,7 +1570,7 @@
         "./src/config.ts",
         "./src/getInfo.ts",
         "./src/interfaces.ts",
-        "./src/invoker.ts"
+        "./src/recaller.ts"
       ],
       "./src/getInfo.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -1582,7 +1580,7 @@
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./src/interfaces.ts",
-        "./src/invoker.ts"
+        "./src/recaller.ts"
       ],
       "./src/index.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -1629,12 +1627,17 @@
         "./src/interfaces.ts"
       ],
       "./src/recaller.ts": [
+        "./node_modules/@types/fs-extra/index.d.ts",
+        "./node_modules/@types/node/events.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/startable/dist/index.d.ts",
+        "./src/interfaces.ts",
+        "./src/invoker.ts"
       ],
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -2797,7 +2800,7 @@
       ],
       "./src/getInfo.ts": [
         "./src/interfaces.ts",
-        "./src/invoker.ts"
+        "./src/recaller.ts"
       ],
       "./src/interfaces.ts": [
         "./node_modules/@types/node/stream.d.ts",
@@ -2807,6 +2810,11 @@
         "./node_modules/@types/node/child_process.d.ts",
         "./node_modules/startable/dist/index.d.ts",
         "./src/interfaces.ts"
+      ],
+      "./src/recaller.ts": [
+        "./node_modules/startable/dist/index.d.ts",
+        "./src/interfaces.ts",
+        "./src/invoker.ts"
       ],
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
         "./node_modules/@types/node/fs.d.ts",

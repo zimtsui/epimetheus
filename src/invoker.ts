@@ -2,17 +2,18 @@ import { Startable, LifePeriod } from 'startable';
 import { ChildProcess, fork } from 'child_process';
 import { once } from 'events';
 import { STOP_SIGNAL } from './config';
-import { ControllerConfig } from './interfaces';
+import { InvokerConfig } from './interfaces';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
 // TODO: 要考虑 subp.kill() 失败的情况
 
-class Invoker extends Startable {
-    public subp!: ChildProcess;
-    public shouldBeRunning = false;
+class AbnormalExit extends Error { }
 
-    constructor(public config: ControllerConfig) {
+class Invoker extends Startable {
+    public subp: ChildProcess | undefined;
+
+    constructor(public config: InvokerConfig) {
         super();
         this.reusable = true;
     }
@@ -28,14 +29,19 @@ class Invoker extends Startable {
                     ...process.env,
                     epimetheus: 'true',
                 },
-                stdio: ['ignore', this.config.stdout!, this.config.stderr!, 'ipc'],
+                stdio: ['ignore', this.config.stdout, this.config.stderr, 'ipc'],
             }
         );
+        this.subp.on('exit', () => {
+            this.subp = undefined;
+            // 对于正常结束的进程，这句话是自动失效的。
+            this.stop(new AbnormalExit('subprocess terminated'));
+        });
         this.subp.on('message', (message: LifePeriod) => {
             if (message === LifePeriod.STOPPING) this.stop(new Error('self stop'));
         });
         await new Promise((resolve, reject) => {
-            this.subp.on('message', (message: LifePeriod) => {
+            this.subp!.on('message', (message: LifePeriod) => {
                 switch (message) {
                     case LifePeriod.STARTED: resolve(); break;
                     case LifePeriod.FAILED: reject(); break;
@@ -45,8 +51,13 @@ class Invoker extends Startable {
     }
 
     protected async _stop(err?: Error) {
-        if (!err) this.subp.kill(STOP_SIGNAL);
-        await once(this.subp, 'exit');
+        if (err instanceof AbnormalExit) return;
+        if (!err) this.subp!.kill(STOP_SIGNAL);
+        await once(this.subp!, 'exit');
+    }
+
+    public kill() {
+        if (this.subp) this.subp.kill('SIGKILL');
     }
 }
 

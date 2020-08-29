@@ -1,15 +1,16 @@
 import { Info } from './interfaces';
-import { Invoker } from './invoker';
+import { Recaller } from './recaller';
 
-function getInfo(invoker: Invoker): Info {
-    const { config } = invoker;
+function getInfo(recaller: Recaller): Info {
+    const { config } = recaller;
     return {
         name: config.name,
         path: config.path,
         cwd: config.cwd,
         args: config.args,
         nodeArgs: config.nodeArgs,
-        status: invoker.lifePeriod,
+        recallerStatus: recaller.lifePeriod,
+        invokerStatus: recaller.invoker.lifePeriod,
     };
 }
 
