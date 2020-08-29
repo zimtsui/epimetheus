@@ -507,17 +507,22 @@
         "affectsGlobalScope": false
       },
       "./src/interfaces.ts": {
-        "version": "b4ad254ffda57f4507233abe49df5aa4c2a04ac07c47471521f10216759b115a",
-        "signature": "da208e0be32920754b2568c531000f64f27c4e8bf8579649a13ac966b35758ae",
+        "version": "2ed988691e9623572563bcfcfb10530c66fe656e669a3573b2c43cdc45172b00",
+        "signature": "5dee20d0895ad31eae2986b20435f7fa6889ad5e7e2d7126c18748250179e06c",
         "affectsGlobalScope": false
       },
       "./src/controller.ts": {
-        "version": "8a22307705a7fc8c81f52271cb88d9e3a43bd8fba3a83d81fd92ac5361d851c0",
+        "version": "7e51b30d79a3ea8f2f434b0e47b5ec7045d62b4f992857c54a2db89ca2861fcd",
         "signature": "5fd657d381d478bfc507d80855657360146fb1b7ba179193a785b44647ca4b90",
         "affectsGlobalScope": false
       },
+      "./node_modules/@types/fs-extra/index.d.ts": {
+        "version": "b4730e5cbeac402e543a0186f3c7521bd7c3c25c8fc7cf048103fc6487566654",
+        "signature": "b4730e5cbeac402e543a0186f3c7521bd7c3c25c8fc7cf048103fc6487566654",
+        "affectsGlobalScope": false
+      },
       "./src/cli.ts": {
-        "version": "e933997649870f48292d035c234d21fc63a965700a39c584f3d2f5d02961c2ba",
+        "version": "c4ef88c5fd6bc6c3e8f5b709988641b12529a4e352f1013679e299ee88dd0bd5",
         "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
         "affectsGlobalScope": false
       },
@@ -786,6 +791,15 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/qs/index.d.ts",
         "./node_modules/@types/serve-static/index.d.ts"
+      ],
+      "./node_modules/@types/fs-extra/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/ts3.7/index.d.ts",
+        "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@types/glob/index.d.ts": [
         "./node_modules/@types/minimatch/index.d.ts",
@@ -1514,8 +1528,10 @@
         "./node_modules/startable/dist/primitive.d.ts"
       ],
       "./src/cli.ts": [
+        "./node_modules/@types/fs-extra/index.d.ts",
         "./node_modules/@types/node-fetch/index.d.ts",
         "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/path.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/process.d.ts",
@@ -1524,7 +1540,8 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/yargs/index.d.ts",
         "./src/config.ts",
-        "./src/controller.ts"
+        "./src/controller.ts",
+        "./src/interfaces.ts"
       ],
       "./src/config.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -2025,6 +2042,15 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/qs/index.d.ts",
         "./node_modules/@types/serve-static/index.d.ts"
+      ],
+      "./node_modules/@types/fs-extra/index.d.ts": [
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/ts3.7/index.d.ts",
+        "./node_modules/@types/node/util.d.ts"
       ],
       "./node_modules/@types/glob/index.d.ts": [
         "./node_modules/@types/minimatch/index.d.ts",
@@ -3094,6 +3120,7 @@
       "./node_modules/@types/cookies/index.d.ts",
       "./node_modules/@types/express-serve-static-core/index.d.ts",
       "./node_modules/@types/express/index.d.ts",
+      "./node_modules/@types/fs-extra/index.d.ts",
       "./node_modules/@types/glob/index.d.ts",
       "./node_modules/@types/http-assert/index.d.ts",
       "./node_modules/@types/http-errors/index.d.ts",

@@ -13,7 +13,7 @@ class Controller extends Startable {
         this.reusable = true;
     }
     async _start() {
-        this.subp = fork(resolve(dirname(fileURLToPath(import.meta.url)), './invokee.js'), [this.config.servicePath, ...this.config.args], {
+        this.subp = fork(resolve(dirname(fileURLToPath(import.meta.url)), './invokee.js'), [this.config.path, ...this.config.args], {
             cwd: this.config.cwd,
             execArgv: this.config.nodeArgs,
             env: {

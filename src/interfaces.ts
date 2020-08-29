@@ -1,6 +1,6 @@
 export interface Config {
     name: string;
-    servicePath: string;
+    path: string;
     cwd: string;
     args: string[];
     nodeArgs: string[];

@@ -5,14 +5,14 @@ import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 const { assert } = chai;
 
-const servicePath = '/home/zim/projects/epimetheus/test/build/service.js';
+const path = '/home/zim/projects/epimetheus/test/build/service.js';
 const dirPath = '/home/zim/projects/epimetheus/test/build';
 const nodeArg = '--experimental-specifier-resolution=node';
 
 export async function testControllerNormal(t: ExecutionContext<unknown>) {
     const ctrler = new Controller({
         name: t.title,
-        servicePath,
+        path: path,
         cwd: dirPath,
         args: ['normal'],
         nodeArgs: [nodeArg],
@@ -26,7 +26,7 @@ export async function testControllerNormal(t: ExecutionContext<unknown>) {
 export async function testControllerSelfStop(t: ExecutionContext<unknown>) {
     const ctrler = new Controller({
         name: t.title,
-        servicePath,
+        path: path,
         cwd: dirPath,
         args: ['self stop'],
         nodeArgs: [nodeArg],
@@ -46,7 +46,7 @@ export async function testControllerSelfStop(t: ExecutionContext<unknown>) {
 export async function testControllerFailed(t: ExecutionContext<unknown>) {
     const ctrler = new Controller({
         name: t.title,
-        servicePath,
+        path: path,
         cwd: dirPath,
         args: ['failed'],
         nodeArgs: [nodeArg],
@@ -58,7 +58,7 @@ export async function testControllerFailed(t: ExecutionContext<unknown>) {
 export async function testControllerBroken(t: ExecutionContext<unknown>) {
     const ctrler = new Controller({
         name: t.title,
-        servicePath,
+        path: path,
         cwd: dirPath,
         args: ['broken'],
         nodeArgs: [nodeArg],
@@ -70,7 +70,7 @@ export async function testControllerBroken(t: ExecutionContext<unknown>) {
 export async function testControllerSelfStopBroken(t: ExecutionContext<unknown>) {
     const ctrler = new Controller({
         name: t.title,
-        servicePath,
+        path: path,
         cwd: dirPath,
         args: ['self stop broken'],
         nodeArgs: [nodeArg],

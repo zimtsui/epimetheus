@@ -1,0 +1,11 @@
+{
+    "name": "hello111",
+    "path": "../build/service4cli.js",
+    "cwd": "../../../../Desktop",
+    "args": [
+        "nihao111"
+    ],
+    "node-args": [
+        "--experimental-specifier-resolution=node"
+    ]
+}
