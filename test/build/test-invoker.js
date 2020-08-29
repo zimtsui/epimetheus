@@ -1,16 +1,13 @@
-import { ExecutionContext } from 'ava';
-import { Controller } from '../../dist/controller';
+import { Invoker } from '../../dist/invoker';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
 chai.use(chaiAsPromised);
 const { assert } = chai;
-
 const path = '/home/zim/projects/epimetheus/test/build/service.js';
 const dirPath = '/home/zim/projects/epimetheus/test/build';
 const nodeArg = '--experimental-specifier-resolution=node';
-
-export async function testControllerNormal(t: ExecutionContext<unknown>) {
-    const ctrler = new Controller({
+export async function testInvokerNormal(t) {
+    const invoker = new Invoker({
         name: t.title,
         path: path,
         cwd: dirPath,
@@ -19,14 +16,13 @@ export async function testControllerNormal(t: ExecutionContext<unknown>) {
         stdout: 'ignore',
         stderr: 'ignore',
     });
-    await ctrler.start(err => {
+    await invoker.start(err => {
         assert.isUndefined(err);
     });
-    await ctrler.stop();
+    await invoker.stop();
 }
-
-export async function testControllerSelfStop(t: ExecutionContext<unknown>) {
-    const ctrler = new Controller({
+export async function testInvokerSelfStop(t) {
+    const invoker = new Invoker({
         name: t.title,
         path: path,
         cwd: dirPath,
@@ -35,20 +31,19 @@ export async function testControllerSelfStop(t: ExecutionContext<unknown>) {
         stdout: 'ignore',
         stderr: 'ignore',
     });
-    let p1: Promise<void>;
-    let p2: Promise<void>;
+    let p1;
+    let p2;
     p2 = new Promise(resolve => {
-        p1 = ctrler.start(err => {
+        p1 = invoker.start(err => {
             assert(err instanceof Error);
-            resolve(ctrler.stopped!);
+            resolve(invoker.stopped);
         });
     });
-    await p1!;
+    await p1;
     await p2;
 }
-
-export async function testControllerFailed(t: ExecutionContext<unknown>) {
-    const ctrler = new Controller({
+export async function testInvokerFailed(t) {
+    const invoker = new Invoker({
         name: t.title,
         path: path,
         cwd: dirPath,
@@ -57,12 +52,11 @@ export async function testControllerFailed(t: ExecutionContext<unknown>) {
         stdout: 'ignore',
         stderr: 'ignore',
     });
-    await assert.isRejected(ctrler.start());
-    await ctrler.stop();
+    await assert.isRejected(invoker.start());
+    await invoker.stop();
 }
-
-export async function testControllerBroken(t: ExecutionContext<unknown>) {
-    const ctrler = new Controller({
+export async function testInvokerBroken(t) {
+    const invoker = new Invoker({
         name: t.title,
         path: path,
         cwd: dirPath,
@@ -71,12 +65,11 @@ export async function testControllerBroken(t: ExecutionContext<unknown>) {
         stdout: 'ignore',
         stderr: 'ignore',
     });
-    await ctrler.start();
-    await ctrler.stop();
+    await invoker.start();
+    await invoker.stop();
 }
-
-export async function testControllerSelfStopBroken(t: ExecutionContext<unknown>) {
-    const ctrler = new Controller({
+export async function testInvokerSelfStopBroken(t) {
+    const invoker = new Invoker({
         name: t.title,
         path: path,
         cwd: dirPath,
@@ -85,14 +78,15 @@ export async function testControllerSelfStopBroken(t: ExecutionContext<unknown>)
         stdout: 'ignore',
         stderr: 'ignore',
     });
-    let p1: Promise<void>;
-    let p2: Promise<void>;
+    let p1;
+    let p2;
     p2 = new Promise(resolve => {
-        p1 = ctrler.start(err => {
+        p1 = invoker.start(err => {
             assert(err instanceof Error);
-            resolve(ctrler.stopped!);
+            resolve(invoker.stopped);
         });
     });
-    await p1!;
+    await p1;
     await p2;
 }
+//# sourceMappingURL=test-invoker.js.map

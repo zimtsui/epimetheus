@@ -1,15 +1,15 @@
 import { Info } from './interfaces';
-import { Controller } from './controller';
+import { Invoker } from './invoker';
 
-function getInfo(ctrler: Controller): Info {
-    const { config } = ctrler;
+function getInfo(invoker: Invoker): Info {
+    const { config } = invoker;
     return {
         name: config.name,
         path: config.path,
         cwd: config.cwd,
         args: config.args,
         nodeArgs: config.nodeArgs,
-        status: ctrler.lifePeriod,
+        status: invoker.lifePeriod,
     };
 }
 

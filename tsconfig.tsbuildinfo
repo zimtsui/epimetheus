@@ -492,13 +492,13 @@
         "affectsGlobalScope": false
       },
       "./node_modules/startable/dist/primitive.d.ts": {
-        "version": "01bd0fb0f8e67915114c70c8c5e3779679167811a2863d30088483a60049a463",
-        "signature": "01bd0fb0f8e67915114c70c8c5e3779679167811a2863d30088483a60049a463",
+        "version": "614ee0ad8cecd1c8b0d8898c9dd974d1fdc65ece13dc69b238e1aa75c5965617",
+        "signature": "614ee0ad8cecd1c8b0d8898c9dd974d1fdc65ece13dc69b238e1aa75c5965617",
         "affectsGlobalScope": false
       },
       "./node_modules/startable/dist/startable.d.ts": {
-        "version": "328d27b2b3bfdae55356c0682b5f8c7dbde435b87f364eb8abed4cf8922a516a",
-        "signature": "328d27b2b3bfdae55356c0682b5f8c7dbde435b87f364eb8abed4cf8922a516a",
+        "version": "885e1fe969ae29569ccbb52a56f850419f52412b774dc4f8ae5e85529f5f9bc1",
+        "signature": "885e1fe969ae29569ccbb52a56f850419f52412b774dc4f8ae5e85529f5f9bc1",
         "affectsGlobalScope": false
       },
       "./node_modules/startable/dist/index.d.ts": {
@@ -511,9 +511,9 @@
         "signature": "7973289f0b6c5a949e01651bf238209b65ebfad4fa863de8400ed8079da10d53",
         "affectsGlobalScope": false
       },
-      "./src/controller.ts": {
-        "version": "70a2303da55140114f54e7c36b5763ac8c5462848f3ba7b6c9a128fd2129f2b1",
-        "signature": "a613e7c0b75e97d9b07af699d02823881c515188108ed37e6a082dfa60fb16ef",
+      "./src/invoker.ts": {
+        "version": "72fd13142da286d8fc3375aa8af1a16d4c58206beecb49399a1f3644576655a3",
+        "signature": "31ead2912281bab9784cb5ab2b0f41c39e93b5b4d7adc5c096e38081fcc24801",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {
@@ -522,23 +522,8 @@
         "affectsGlobalScope": false
       },
       "./src/cli.ts": {
-        "version": "36643b62c6b59928c36853fd5c82e95a31b271ac4a91b632f18573edb4164f42",
+        "version": "9cb12b5621e242107e391c450d1f656cfafd6e61c445aee523f4432aa9709f4e",
         "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
-        "affectsGlobalScope": false
-      },
-      "./src/getInfo.ts": {
-        "version": "565f6612822c747ff517be4d2e6aa715f4bf1be5c4fd0ff7355d5f42c1764a4a",
-        "signature": "4881ed9698560ebac4abc66cd52e8285dedc5f461a8657c0dc2b8486233fee2d",
-        "affectsGlobalScope": false
-      },
-      "./src/index.ts": {
-        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
-        "affectsGlobalScope": false
-      },
-      "./src/invokee.ts": {
-        "version": "5b4e6b903ae0bd7e74ad418e4b02c1f165c1f3d559189102595ba222e962659b",
-        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/accepts/index.d.ts": {
@@ -631,9 +616,29 @@
         "signature": "b8d67a816b437cd16692069fa2d9c2255216673fdf9d1bdd6a9d2f23a803796f",
         "affectsGlobalScope": false
       },
-      "./src/invoker.ts": {
-        "version": "a81418bf34b516e4ec845e259228bcf0fc53a71ebda4110657fee5561a67bd19",
+      "./src/getInfo.ts": {
+        "version": "39c9a38d78c686c2571fd624ff9ddb23dd3f09064ceff31fd3b7a113c2bcdf06",
+        "signature": "a16fc765b16cb71336f93c6f3e12e392709adacf4e576938b33c07fbfcc63739",
+        "affectsGlobalScope": false
+      },
+      "./src/controller.ts": {
+        "version": "b4a5c229bfeeb04aeb15e32c9c286886751fc53b736b9714d24caad7eec5e996",
         "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
+        "affectsGlobalScope": false
+      },
+      "./src/index.ts": {
+        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "affectsGlobalScope": false
+      },
+      "./src/invokee.ts": {
+        "version": "5b4e6b903ae0bd7e74ad418e4b02c1f165c1f3d559189102595ba222e962659b",
+        "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
+        "affectsGlobalScope": false
+      },
+      "./src/recaller.ts": {
+        "version": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
+        "signature": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/chai/index.d.ts": {
@@ -1540,8 +1545,8 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/@types/yargs/index.d.ts",
         "./src/config.ts",
-        "./src/controller.ts",
-        "./src/interfaces.ts"
+        "./src/interfaces.ts",
+        "./src/invoker.ts"
       ],
       "./src/config.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -1552,19 +1557,22 @@
         "./node_modules/@types/node/util.d.ts"
       ],
       "./src/controller.ts": [
-        "./node_modules/@types/node/child_process.d.ts",
+        "./node_modules/@types/fs-extra/index.d.ts",
+        "./node_modules/@types/koa-bodyparser/index.d.ts",
+        "./node_modules/@types/koa-router/index.d.ts",
+        "./node_modules/@types/koa/index.d.ts",
         "./node_modules/@types/node/events.d.ts",
         "./node_modules/@types/node/fs.d.ts",
-        "./node_modules/@types/node/path.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/url.d.ts",
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/startable/dist/index.d.ts",
         "./src/config.ts",
-        "./src/interfaces.ts"
+        "./src/getInfo.ts",
+        "./src/interfaces.ts",
+        "./src/invoker.ts"
       ],
       "./src/getInfo.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -1573,8 +1581,8 @@
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
-        "./src/controller.ts",
-        "./src/interfaces.ts"
+        "./src/interfaces.ts",
+        "./src/invoker.ts"
       ],
       "./src/index.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -1606,22 +1614,27 @@
         "./src/config.ts"
       ],
       "./src/invoker.ts": [
-        "./node_modules/@types/fs-extra/index.d.ts",
-        "./node_modules/@types/koa-bodyparser/index.d.ts",
-        "./node_modules/@types/koa-router/index.d.ts",
-        "./node_modules/@types/koa/index.d.ts",
+        "./node_modules/@types/node/child_process.d.ts",
         "./node_modules/@types/node/events.d.ts",
+        "./node_modules/@types/node/fs.d.ts",
+        "./node_modules/@types/node/path.d.ts",
+        "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/ts3.2/fs.d.ts",
+        "./node_modules/@types/node/ts3.2/process.d.ts",
+        "./node_modules/@types/node/ts3.2/util.d.ts",
+        "./node_modules/@types/node/url.d.ts",
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/startable/dist/index.d.ts",
+        "./src/config.ts",
+        "./src/interfaces.ts"
+      ],
+      "./src/recaller.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts",
-        "./node_modules/startable/dist/index.d.ts",
-        "./src/config.ts",
-        "./src/controller.ts",
-        "./src/getInfo.ts",
-        "./src/interfaces.ts"
+        "./node_modules/@types/node/util.d.ts"
       ],
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -2782,18 +2795,18 @@
         "./node_modules/@types/node/util.d.ts",
         "./node_modules/startable/dist/primitive.d.ts"
       ],
-      "./src/controller.ts": [
-        "./node_modules/@types/node/child_process.d.ts",
-        "./node_modules/startable/dist/index.d.ts",
-        "./src/interfaces.ts"
-      ],
       "./src/getInfo.ts": [
-        "./src/controller.ts",
-        "./src/interfaces.ts"
+        "./src/interfaces.ts",
+        "./src/invoker.ts"
       ],
       "./src/interfaces.ts": [
         "./node_modules/@types/node/stream.d.ts",
         "./node_modules/startable/dist/index.d.ts"
+      ],
+      "./src/invoker.ts": [
+        "./node_modules/@types/node/child_process.d.ts",
+        "./node_modules/startable/dist/index.d.ts",
+        "./src/interfaces.ts"
       ],
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -3211,6 +3224,7 @@
       "./src/interfaces.ts",
       "./src/invokee.ts",
       "./src/invoker.ts",
+      "./src/recaller.ts",
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts",
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.core.d.ts",
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.d.ts",

@@ -1,4 +1,4 @@
 import { Info } from './interfaces';
-import { Controller } from './controller';
-declare function getInfo(ctrler: Controller): Info;
+import { Invoker } from './invoker';
+declare function getInfo(invoker: Invoker): Info;
 export { getInfo as default, getInfo, Info, };

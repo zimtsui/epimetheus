@@ -4,9 +4,13 @@ import fetch from 'node-fetch';
 import { PORT } from './config';
 import { URL } from 'url';
 import { resolve, dirname } from 'path';
-import Controller from './controller';
+import Invoker from './invoker';
 import fse from 'fs-extra';
+import { format } from 'util';
 const { readJsonSync } = fse;
+const prefix = '[epi-cli] ';
+console.log = (...args) => console.info(`${prefix}${format(...args)}`);
+console.error = (...args) => console.warn(`${prefix}${format(...args)}`);
 const options = {
     path: {
         describe: 'path of the script',
@@ -94,7 +98,7 @@ yargs
 })().catch(console.error)).command('start <name>', 'start a registered daemon', yargs => {
 }, args => (async () => {
     const url = new URL(`http://localhost:${PORT}/start?name=${args.name}`).href;
-    const res = await fetch(url);
+    const res = await fetch(url, { method: 'put' });
     if (!res.ok)
         throw new Error(`${res.status}: ${res.statusText}`);
 })().catch(console.error)).command('stop [name]', 'stop a/all registered daemons', yargs => {
@@ -102,7 +106,7 @@ yargs
     const url = new URL(args.name
         ? `http://localhost:${PORT}/stop?name=${args.name}`
         : `http://localhost:${PORT}/stop`).href;
-    const res = await fetch(url);
+    const res = await fetch(url, { method: 'put' });
     if (!res.ok)
         throw new Error(`${res.status}: ${res.statusText}`);
 })().catch(console.error)).command('delete [name]', 'delete a/all registries', yargs => {
@@ -110,7 +114,7 @@ yargs
     const url = new URL(args.name
         ? `http://localhost:${PORT}/delete?name=${args.name}`
         : `http://localhost:${PORT}/delete`).href;
-    const res = await fetch(url);
+    const res = await fetch(url, { method: 'delete' });
     if (!res.ok)
         throw new Error(`${res.status}: ${res.statusText}`);
 })().catch(console.error)).command('run [name]', 'start a script synchronously', yargs => {
@@ -123,7 +127,7 @@ yargs
         .config('config', configParser)
         .check(checker);
 }, args => (async () => {
-    const ctrler = new Controller({
+    const invoker = new Invoker({
         name: args.name,
         path: resolve(process.cwd(), args.path),
         cwd: resolve(process.cwd(), args.cwd),
@@ -138,10 +142,10 @@ yargs
         });
         console.log('\nreceived SIGINT');
         console.log('send SIGINT again to terminate immediately.');
-        ctrler.stop().catch(console.error);
+        invoker.stop().catch(console.error);
     });
     console.log('starting...');
-    return ctrler.start(err => {
+    return invoker.start(err => {
         if (err)
             console.error(err);
         console.log('stopping...');

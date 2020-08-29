@@ -6,12 +6,12 @@ import {
     testSoulmateSelfStopBroken,
 } from './test-invokee';
 import {
-    testControllerNormal,
-    testControllerSelfStop,
-    testControllerFailed,
-    testControllerBroken,
-    testControllerSelfStopBroken,
-} from './test-controller';
+    testInvokerNormal,
+    testInvokerSelfStop,
+    testInvokerFailed,
+    testInvokerBroken,
+    testInvokerSelfStopBroken,
+} from './test-invoker';
 import test from 'ava';
 
 test('soulmate normal', testSoulmateNormal);
@@ -20,8 +20,8 @@ test('soulmate failed', testSoulmateFailed);
 test('soulmate broken', testSoulmateBroken);
 test('soulmate self stop broken', testSoulmateSelfStopBroken);
 
-test('controller normal', testControllerNormal);
-test('controller self stop', testControllerSelfStop);
-test('controller failed', testControllerFailed);
-test('controller broken', testControllerBroken);
-test('controller self stop broken', testControllerSelfStopBroken);
+test('invoker normal', testInvokerNormal);
+test('invoker self stop', testInvokerSelfStop);
+test('invoker failed', testInvokerFailed);
+test('invoker broken', testInvokerBroken);
+test('invoker self stop broken', testInvokerSelfStopBroken);
