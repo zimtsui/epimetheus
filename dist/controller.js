@@ -20,7 +20,7 @@ class Controller extends Startable {
                 ...process.env,
                 epimetheus: 'true',
             },
-            stdio: process.env.NODE_ENV === 'test' ? 'ignore' : 'inherit',
+            stdio: ['ignore', this.config.stdout, this.config.stderr, 'ipc'],
         });
         this.subp.on('message', (message) => {
             if (message === 4 /* STOPPING */)

@@ -1,14 +1,14 @@
-import { Config } from './interfaces';
-import { LifePeriod } from 'startable';
+import { Info } from './interfaces';
 import { Controller } from './controller';
 
-interface Info extends Config {
-    status: LifePeriod;
-}
-
 function getInfo(ctrler: Controller): Info {
+    const { config } = ctrler;
     return {
-        ...ctrler.config,
+        name: config.name,
+        path: config.path,
+        cwd: config.cwd,
+        args: config.args,
+        nodeArgs: config.nodeArgs,
         status: ctrler.lifePeriod,
     };
 }

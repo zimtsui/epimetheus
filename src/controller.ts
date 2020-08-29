@@ -2,7 +2,7 @@ import { Startable, LifePeriod } from 'startable';
 import { ChildProcess, fork } from 'child_process';
 import { once } from 'events';
 import { STOP_SIGNAL } from './config';
-import { Config } from './interfaces';
+import { ControllerConfig } from './interfaces';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -12,7 +12,7 @@ class Controller extends Startable {
     public subp!: ChildProcess;
     public shouldBeRunning = true;
 
-    constructor(public config: Config) {
+    constructor(public config: ControllerConfig) {
         super();
         this.reusable = true;
     }
@@ -28,7 +28,7 @@ class Controller extends Startable {
                     ...process.env,
                     epimetheus: 'true',
                 },
-                stdio: process.env.NODE_ENV === 'test' ? 'ignore' : 'inherit',
+                stdio: ['ignore', this.config.stdout, this.config.stderr, 'ipc'],
             }
         );
         this.subp.on('message', (message: LifePeriod) => {

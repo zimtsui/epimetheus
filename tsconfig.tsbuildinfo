@@ -507,13 +507,13 @@
         "affectsGlobalScope": false
       },
       "./src/interfaces.ts": {
-        "version": "2ed988691e9623572563bcfcfb10530c66fe656e669a3573b2c43cdc45172b00",
-        "signature": "5dee20d0895ad31eae2986b20435f7fa6889ad5e7e2d7126c18748250179e06c",
+        "version": "84bd7ff019d7ae52d7927ce586e12c4b5e6b66b3ff18ab123f23f44fa4b8960b",
+        "signature": "029d538570ccaf5ea1ec5a8abbbc192d4aaae267f53c7426ba7602ee3e61e166",
         "affectsGlobalScope": false
       },
       "./src/controller.ts": {
-        "version": "7e51b30d79a3ea8f2f434b0e47b5ec7045d62b4f992857c54a2db89ca2861fcd",
-        "signature": "5fd657d381d478bfc507d80855657360146fb1b7ba179193a785b44647ca4b90",
+        "version": "a9083ff78110617697f75b7eddc8d579da9307ecc8171effded8e7047c7cc2ba",
+        "signature": "a613e7c0b75e97d9b07af699d02823881c515188108ed37e6a082dfa60fb16ef",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {
@@ -522,13 +522,13 @@
         "affectsGlobalScope": false
       },
       "./src/cli.ts": {
-        "version": "c4ef88c5fd6bc6c3e8f5b709988641b12529a4e352f1013679e299ee88dd0bd5",
+        "version": "cbe112258946ad66b325336af8be27d4cb03cb9c14dc1407e063e2ce2c97168e",
         "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
         "affectsGlobalScope": false
       },
       "./src/getInfo.ts": {
-        "version": "de8fb2b0931eae5635f157fbccdd44143c4841f7508aae6ed51cb89ef0d6b251",
-        "signature": "228c13cb0f6d3ed12cc47a971664956854749449ed6b962b2cb7fc2219218854",
+        "version": "565f6612822c747ff517be4d2e6aa715f4bf1be5c4fd0ff7355d5f42c1764a4a",
+        "signature": "4881ed9698560ebac4abc66cd52e8285dedc5f461a8657c0dc2b8486233fee2d",
         "affectsGlobalScope": false
       },
       "./src/index.ts": {
@@ -632,7 +632,7 @@
         "affectsGlobalScope": false
       },
       "./src/invoker.ts": {
-        "version": "642378e521bd20ea7b8915ae9887687b7b8a868967a4faf0b70f4e2c08aaec85",
+        "version": "652cf430ef79658f031f4695b59ccf96b5641d793cd10408b94c8783b76165af",
         "signature": "d9217da63c6d91674a54b3c9283144dcb308209df2ca17bf6a1bd650ec60ebb6",
         "affectsGlobalScope": false
       },
@@ -1573,7 +1573,6 @@
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
-        "./node_modules/startable/dist/index.d.ts",
         "./src/controller.ts",
         "./src/interfaces.ts"
       ],
@@ -1588,10 +1587,12 @@
       "./src/interfaces.ts": [
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
+        "./node_modules/@types/node/stream.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
-        "./node_modules/@types/node/util.d.ts"
+        "./node_modules/@types/node/util.d.ts",
+        "./node_modules/startable/dist/index.d.ts"
       ],
       "./src/invokee.ts": [
         "./node_modules/@types/node/fs.d.ts",
@@ -1605,9 +1606,11 @@
         "./src/config.ts"
       ],
       "./src/invoker.ts": [
+        "./node_modules/@types/fs-extra/index.d.ts",
         "./node_modules/@types/koa-bodyparser/index.d.ts",
         "./node_modules/@types/koa-router/index.d.ts",
         "./node_modules/@types/koa/index.d.ts",
+        "./node_modules/@types/node/events.d.ts",
         "./node_modules/@types/node/fs.d.ts",
         "./node_modules/@types/node/process.d.ts",
         "./node_modules/@types/node/ts3.2/fs.d.ts",
@@ -2784,9 +2787,12 @@
         "./src/interfaces.ts"
       ],
       "./src/getInfo.ts": [
-        "./node_modules/startable/dist/index.d.ts",
         "./src/controller.ts",
         "./src/interfaces.ts"
+      ],
+      "./src/interfaces.ts": [
+        "./node_modules/@types/node/stream.d.ts",
+        "./node_modules/startable/dist/index.d.ts"
       ],
       "../../../../usr/local/lib/node_modules/typescript/lib/lib.es2015.collection.d.ts": [
         "./node_modules/@types/node/fs.d.ts",

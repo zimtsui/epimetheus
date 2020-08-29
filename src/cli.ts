@@ -6,7 +6,7 @@ import { URL, fileURLToPath } from 'url';
 import { resolve, dirname } from 'path';
 import Controller from './controller';
 import fse from 'fs-extra';
-import { Config } from './interfaces';
+import { SerializableConfig } from './interfaces';
 const { readJsonSync } = fse;
 
 const options = {
@@ -33,12 +33,20 @@ const options = {
         alias: 'c',
         type: <'string'>'string',
     },
+    stdout: {
+        type: <'string'>'string',
+    },
+    errFilePath: {
+        type: <'string'>'string',
+    }
 };
 
 function configParser(path: string) {
-    const config = <Partial<Config>>readJsonSync(path);
+    const config = <Partial<SerializableConfig>>readJsonSync(path);
     config.path = resolve(dirname(path), config.path!);
-    if (config.cwd) config.cwd = resolve(dirname(path), config.cwd!);
+    if (config.cwd) config.cwd = resolve(dirname(path), config.cwd);
+    if (config.outFilePath) config.outFilePath = resolve(dirname(path), config.outFilePath);
+    if (config.errFilePath) config.errFilePath = resolve(dirname(path), config.errFilePath);
     return config;
 }
 
@@ -56,8 +64,8 @@ yargs
         "strip-aliased": true,
         "strip-dashed": true,
     }).command(
-        'start <name>',
-        'start a script as a daemon',
+        'register [name]',
+        'register a script as a daemon',
         yargs => {
             yargs
                 .positional('name', {
@@ -65,30 +73,61 @@ yargs
                     describe: 'name of the process',
                 })
                 .option(options)
-                .config(configParser);
+                .config('config', configParser)
+                .check(checker);
         }, args => (async () => {
-            const res = await fetch(`http://localhost:${PORT}/start`, {
+            if (!args.outFilePath) args.outFilePath = resolve(
+                <string>process.env.HOME,
+                `./.epimetheus/log/${args.name}.log`
+            );
+            if (!args.errFilePath) args.errFilePath = resolve(
+                <string>process.env.HOME,
+                `./.epimetheus/log/${args.name}.log`
+            );
+
+            const config: SerializableConfig = {
+                name: <string>args.name,
+                path: resolve(process.cwd(), <string>args.path),
+                cwd: resolve(process.cwd(), <string>args.cwd),
+                args: <string[]>args.args,
+                nodeArgs: <string[]>args.nodeArgs,
+                outFilePath: resolve(process.cwd(), <string>args.outFilePath),
+                errFilePath: resolve(process.cwd(), <string>args.errFilePath),
+            };
+            const res = await fetch(`http://localhost:${PORT}/register`, {
                 method: 'post',
                 headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({
-                    name: <string>args.name,
-                    path: resolve(process.cwd(), <string>args.path),
-                    cwd: resolve(process.cwd(), <string>args.cwd),
-                    args: <string[]>args.args,
-                    nodeArgs: <string[]>args.nodeArgs,
-                }),
+                body: JSON.stringify(config),
             });
             if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
         })().catch(console.error)
     ).command(
+        'start <name>',
+        'start a registered daemon',
+        yargs => {
+        }, args => (async () => {
+            const url = new URL(`http://localhost:${PORT}/start?name=${args.name}`).href;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+        })().catch(console.error)
+    ).command(
         'stop [name]',
-        'stop a daemon',
+        'stop a/all registered daemon(s)',
         yargs => {
         }, args => (async () => {
             const url = new URL(args.name
                 ? `http://localhost:${PORT}/stop?name=${args.name}`
                 : `http://localhost:${PORT}/stop`
             ).href;
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+        })().catch(console.error)
+    ).command(
+        'delete <name>',
+        'delete a registry',
+        yargs => {
+        }, args => (async () => {
+            const url = new URL(`http://localhost:${PORT}/delete?name=${args.name}`).href;
             const res = await fetch(url);
             if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
         })().catch(console.error)
@@ -111,6 +150,8 @@ yargs
                 cwd: resolve(process.cwd(), <string>args.cwd),
                 args: <string[]>args.args,
                 nodeArgs: <string[]>args.nodeArgs,
+                stdout: 'inherit',
+                stderr: 'inherit',
             });
 
             process.once('SIGINT', () => {

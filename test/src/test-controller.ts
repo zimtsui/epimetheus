@@ -16,6 +16,8 @@ export async function testControllerNormal(t: ExecutionContext<unknown>) {
         cwd: dirPath,
         args: ['normal'],
         nodeArgs: [nodeArg],
+        stdout: 'ignore',
+        stderr: 'ignore',
     });
     await ctrler.start(err => {
         assert.isUndefined(err);
@@ -30,6 +32,8 @@ export async function testControllerSelfStop(t: ExecutionContext<unknown>) {
         cwd: dirPath,
         args: ['self stop'],
         nodeArgs: [nodeArg],
+        stdout: 'ignore',
+        stderr: 'ignore',
     });
     let p1: Promise<void>;
     let p2: Promise<void>;
@@ -50,6 +54,8 @@ export async function testControllerFailed(t: ExecutionContext<unknown>) {
         cwd: dirPath,
         args: ['failed'],
         nodeArgs: [nodeArg],
+        stdout: 'ignore',
+        stderr: 'ignore',
     });
     await assert.isRejected(ctrler.start());
     await ctrler.stop();
@@ -62,6 +68,8 @@ export async function testControllerBroken(t: ExecutionContext<unknown>) {
         cwd: dirPath,
         args: ['broken'],
         nodeArgs: [nodeArg],
+        stdout: 'ignore',
+        stderr: 'ignore',
     });
     await ctrler.start();
     await ctrler.stop();
@@ -74,6 +82,8 @@ export async function testControllerSelfStopBroken(t: ExecutionContext<unknown>)
         cwd: dirPath,
         args: ['self stop broken'],
         nodeArgs: [nodeArg],
+        stdout: 'ignore',
+        stderr: 'ignore',
     });
     let p1: Promise<void>;
     let p2: Promise<void>;

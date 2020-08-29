@@ -5,8 +5,6 @@ import { once } from 'events';
 import { STOP_SIGNAL } from '../../dist/config';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-import { promisify } from 'util';
-const sleep = promisify(setTimeout);
 
 const packagePath = resolve(fileURLToPath(dirname(import.meta.url)), '../..');
 const soulmatePath = resolve(packagePath, './dist/invokee.js');

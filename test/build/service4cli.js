@@ -7,6 +7,8 @@ class Service extends Startable {
             this.stop(new Error('some fatal error')).catch(console.error);
         }, 5000).unref();
         // this.stop(new Error('self stop')).catch(console.error);
+        console.log(`cwd: ${process.cwd()}`);
+        console.log(`args: ${process.argv.slice(2)}`);
     }
     async _stop() {
         this.timer.close();
