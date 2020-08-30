@@ -2,7 +2,7 @@ import { ExecutionContext } from 'ava';
 import { fork } from 'child_process';
 import { LifePeriod } from 'startable';
 import { once } from 'events';
-import { STOP_SIGNAL } from '../../dist/config';
+import { STOP_SIGNAL, DEFAULT_STOP_TIMEOUT } from '../../dist/config';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
@@ -22,7 +22,8 @@ export async function testInvokeeNormal(t: ExecutionContext<unknown>) {
             execArgv: [nodeArg],
             env: {
                 ...process.env,
-                epimetheus: 'true',
+                EPIMETHEUS: 'true',
+                STOP_TIMEOUT: `${DEFAULT_STOP_TIMEOUT}`,
             },
             stdio,
         }
@@ -50,7 +51,8 @@ export async function testInvokeeSelfStop(t: ExecutionContext<unknown>) {
             execArgv: [nodeArg],
             env: {
                 ...process.env,
-                epimetheus: '',
+                EPIMETHEUS: 'true',
+                STOP_TIMEOUT: `${DEFAULT_STOP_TIMEOUT}`,
             },
             stdio,
         }
@@ -79,7 +81,8 @@ export async function testInvokeeFailed(t: ExecutionContext<unknown>) {
             execArgv: [nodeArg],
             env: {
                 ...process.env,
-                epimetheus: '',
+                EPIMETHEUS: 'true',
+                STOP_TIMEOUT: `${DEFAULT_STOP_TIMEOUT}`,
             },
             stdio,
         }
@@ -108,7 +111,8 @@ export async function testInvokeeBroken(t: ExecutionContext<unknown>) {
             execArgv: [nodeArg],
             env: {
                 ...process.env,
-                epimetheus: '',
+                EPIMETHEUS: 'true',
+                STOP_TIMEOUT: `${DEFAULT_STOP_TIMEOUT}`,
             },
             stdio,
         }
@@ -136,7 +140,8 @@ export async function testInvokeeSelfStopBroken(t: ExecutionContext<unknown>) {
             execArgv: [nodeArg],
             env: {
                 ...process.env,
-                epimetheus: '',
+                EPIMETHEUS: 'true',
+                STOP_TIMEOUT: `${DEFAULT_STOP_TIMEOUT}`,
             },
             stdio,
         }

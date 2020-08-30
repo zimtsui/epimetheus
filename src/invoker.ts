@@ -25,7 +25,8 @@ class Invoker extends Startable {
                 execArgv: this.config.nodeArgs,
                 env: {
                     ...process.env,
-                    epimetheus: 'true',
+                    EPIMETHEUS: 'true',
+                    STOP_TIMEOUT: `${this.config.STOP_TIMEOUT}`,
                 },
                 stdio: ['ignore', this.config.stdout, this.config.stderr, 'ipc'],
             }

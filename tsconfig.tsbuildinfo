@@ -487,8 +487,8 @@
         "affectsGlobalScope": false
       },
       "./src/config.ts": {
-        "version": "842b8c3395249feaa94579ee86160f3a2f18a2d38f39c247c15ed01fdf69233a",
-        "signature": "b863206f59bab719c708818f3ce66e171545991288cf2b2ba74081d87d2ef62e",
+        "version": "2a728ce98fe462a8b41d4fc0700d46bf261da40a5e303e64625daa4f26f3ad79",
+        "signature": "6777555fba7463b7203cc632182d5d683a9aa451037e53750da6923cb4a0d516",
         "affectsGlobalScope": false
       },
       "./node_modules/startable/dist/primitive.d.ts": {
@@ -507,12 +507,12 @@
         "affectsGlobalScope": false
       },
       "./src/interfaces.ts": {
-        "version": "3d34bd7f5d404a450bc878543c319072ffaf12122eaa4b424cd5e866c2d021e2",
-        "signature": "ae85dcba982aa0eeb236f51b28b5e1fe7cf40c2164e0ec7928b473353f8dcd30",
+        "version": "3850a561c52a58badf26cf4f1848c02460778aafefa251309bf31936f7c03141",
+        "signature": "de5247d7469ef2d82ce35ec99604f2526eb3c2fcd8b4a83f4625fd500c5443a1",
         "affectsGlobalScope": false
       },
       "./src/invoker.ts": {
-        "version": "3be7e4de82823309c1523535766ec3b968aae6a51f684ec8cc9c590523e42214",
+        "version": "1907d8c971804cb2500eae338c222ad6ceaac2b893697fe40fe04aec11772e6d",
         "signature": "fbf16459e1e9c3f7301b918a15a4deef7c562131a011f01ffb58f3fc9e40f5e6",
         "affectsGlobalScope": false
       },
@@ -522,7 +522,7 @@
         "affectsGlobalScope": false
       },
       "./src/cli.ts": {
-        "version": "aefe5be0d8d83f71cef7d5164bd077f3e6e609267c443795f20b984def7a4f60",
+        "version": "085df9e7bfa2e6eae94724bb91685fffc5cb9a62f39fa0f0f5b3d3d1ddac728b",
         "signature": "cca4aa131958af28986a53b6bf64538501ce232f07b9e72bb88643c7ebf5ccb9",
         "affectsGlobalScope": false
       },
@@ -637,7 +637,7 @@
         "affectsGlobalScope": false
       },
       "./src/invokee.ts": {
-        "version": "c667bd67fc224cb0e83a24dcd98cb9d771b2938aa79e0453e0338cc000b93b8f",
+        "version": "d52cda568de1cc5d6d0023212c3cb6bafc9c72051b3a2fe27ac3224583b139ec",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
@@ -1608,8 +1608,7 @@
         "./node_modules/@types/node/ts3.2/process.d.ts",
         "./node_modules/@types/node/ts3.2/util.d.ts",
         "./node_modules/@types/node/util.d.ts",
-        "./node_modules/startable/dist/index.d.ts",
-        "./src/config.ts"
+        "./node_modules/startable/dist/index.d.ts"
       ],
       "./src/invoker.ts": [
         "./node_modules/@types/node/child_process.d.ts",

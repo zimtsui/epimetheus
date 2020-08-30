@@ -1,8 +1,8 @@
 #!/usr/bin/env -S node --experimental-specifier-resolution=node --enable-source-maps
 import yargs from 'yargs';
 import fetch from 'node-fetch';
-import { PORT } from './config';
-import { URL, fileURLToPath } from 'url';
+import { PORT, DEFAULT_STOP_TIMEOUT } from './config';
+import { URL } from 'url';
 import { resolve, dirname } from 'path';
 import Invoker from './invoker';
 import fse from 'fs-extra';
@@ -26,12 +26,12 @@ const options = {
     },
     args: {
         describe: 'arguments for the script',
-        type: <'string'>'array',
+        type: <'array'>'array',
         default: [],
     },
     'node-args': {
         describe: 'arguments for nodejs',
-        type: <'string'>'array',
+        type: <'array'>'array',
         default: [
             '--experimental-specifier-resolution=node',
             '--enable-source-maps',
@@ -41,12 +41,16 @@ const options = {
         alias: 'c',
         type: <'string'>'string',
     },
-    outFilePath: {
+    'out-file-path': {
         type: <'string'>'string',
     },
-    errFilePath: {
+    'err-file-path': {
         type: <'string'>'string',
-    }
+    },
+    'stop-timeout': {
+        type: <'number'>'number',
+        default: DEFAULT_STOP_TIMEOUT,
+    },
 };
 
 function configParser(path: string) {
@@ -101,6 +105,7 @@ yargs
                 nodeArgs: <string[]>args.nodeArgs,
                 outFilePath: resolve(process.cwd(), <string>args.outFilePath),
                 errFilePath: resolve(process.cwd(), <string>args.errFilePath),
+                STOP_TIMEOUT: <number>args.stopTimeout,
             };
             const res = await fetch(`http://localhost:${PORT}/register`, {
                 method: 'post',
@@ -165,6 +170,7 @@ yargs
                 nodeArgs: <string[]>args.nodeArgs,
                 stdout: 'inherit',
                 stderr: 'inherit',
+                STOP_TIMEOUT: <number>args.stopTimeout,
             });
 
             process.once('SIGINT', () => {

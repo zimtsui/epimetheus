@@ -1,17 +1,20 @@
 import { Startable, LifePeriod } from 'startable';
-import { STOP_TIMEOUT } from './config';
 import { resolve } from 'path';
 import { promisify } from 'util';
+const STOP_TIMEOUT = Number.parseInt(<string>process.env.STOP_TIMEOUT);
+let EPIMETHEUS: string | undefined;
+
 (async () => {
     const sleep = promisify(setTimeout);
 
-    switch (process.env.epimetheus) {
-        case 'false': process.env.epimetheus = ''; break;
-        case 'FALSE': process.env.epimetheus = ''; break;
-        case '': process.env.epimetheus = 'true'; break;
+    switch (process.env.EPIMETHEUS) {
+        case 'false': EPIMETHEUS = ''; break;
+        case 'FALSE': EPIMETHEUS = ''; break;
+        case '': EPIMETHEUS = 'true'; break;
+        default: EPIMETHEUS = process.env.EPIMETHEUS;
     }
 
-    if (!process.env.epimetheus)
+    if (!EPIMETHEUS)
         console.log('WARNING: It\'s not called by Epimetheus.');
 
     interface StartableConsctrutor {
@@ -36,18 +39,18 @@ import { promisify } from 'util';
                 // 放到 invokee 的 onStopping() 中处理，因为要在 exit 前输出到 sterr
                 this.stop(err).catch(() => { });
             }).then(() => {
-                if (process.env.epimetheus) process.send!(LifePeriod.STARTED);
+                if (EPIMETHEUS) process.send!(LifePeriod.STARTED);
             }, () => {
-                if (process.env.epimetheus) process.send!(LifePeriod.FAILED);
+                if (EPIMETHEUS) process.send!(LifePeriod.FAILED);
             });
         }
 
         protected async _stop() {
-            if (process.env.epimetheus) process.send!(LifePeriod.STOPPING);
+            if (EPIMETHEUS) process.send!(LifePeriod.STOPPING);
 
             await any([
                 this.service.stop().then(() => {
-                    if (process.env.epimetheus) process.disconnect();
+                    if (EPIMETHEUS) process.disconnect();
                 }),
                 sleep(STOP_TIMEOUT).then(() => { throw new Error('stop() times out.') }),
             ]);

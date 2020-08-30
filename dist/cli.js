@@ -1,7 +1,7 @@
 #!/usr/bin/env -S node --experimental-specifier-resolution=node --enable-source-maps
 import yargs from 'yargs';
 import fetch from 'node-fetch';
-import { PORT } from './config';
+import { PORT, DEFAULT_STOP_TIMEOUT } from './config';
 import { URL } from 'url';
 import { resolve, dirname } from 'path';
 import Invoker from './invoker';
@@ -38,12 +38,16 @@ const options = {
         alias: 'c',
         type: 'string',
     },
-    outFilePath: {
+    'out-file-path': {
         type: 'string',
     },
-    errFilePath: {
+    'err-file-path': {
         type: 'string',
-    }
+    },
+    'stop-timeout': {
+        type: 'number',
+        default: DEFAULT_STOP_TIMEOUT,
+    },
 };
 function configParser(path) {
     const config = readJsonSync(path);
@@ -90,6 +94,7 @@ yargs
         nodeArgs: args.nodeArgs,
         outFilePath: resolve(process.cwd(), args.outFilePath),
         errFilePath: resolve(process.cwd(), args.errFilePath),
+        STOP_TIMEOUT: args.stopTimeout,
     };
     const res = await fetch(`http://localhost:${PORT}/register`, {
         method: 'post',
@@ -138,6 +143,7 @@ yargs
         nodeArgs: args.nodeArgs,
         stdout: 'inherit',
         stderr: 'inherit',
+        STOP_TIMEOUT: args.stopTimeout,
     });
     process.once('SIGINT', () => {
         process.once('SIGINT', () => {

@@ -1,6 +1,7 @@
 import { Invoker } from '../../dist/invoker';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import { DEFAULT_STOP_TIMEOUT } from '../../dist/config';
 chai.use(chaiAsPromised);
 const { assert } = chai;
 const path = '/home/zim/projects/epimetheus/test/build/service.js';
@@ -15,6 +16,7 @@ export async function testInvokerNormal(t) {
         nodeArgs: [nodeArg],
         stdout: 'ignore',
         stderr: 'ignore',
+        STOP_TIMEOUT: DEFAULT_STOP_TIMEOUT,
     });
     await invoker.start(err => {
         assert.isUndefined(err);
@@ -30,6 +32,7 @@ export async function testInvokerSelfStop(t) {
         nodeArgs: [nodeArg],
         stdout: 'ignore',
         stderr: 'ignore',
+        STOP_TIMEOUT: DEFAULT_STOP_TIMEOUT,
     });
     let p1;
     let p2;
@@ -51,6 +54,7 @@ export async function testInvokerFailed(t) {
         nodeArgs: [nodeArg],
         stdout: 'ignore',
         stderr: 'ignore',
+        STOP_TIMEOUT: DEFAULT_STOP_TIMEOUT,
     });
     await assert.isRejected(invoker.start());
     await invoker.stop();
@@ -64,6 +68,7 @@ export async function testInvokerBroken(t) {
         nodeArgs: [nodeArg],
         stdout: 'ignore',
         stderr: 'ignore',
+        STOP_TIMEOUT: DEFAULT_STOP_TIMEOUT,
     });
     await invoker.start();
     await invoker.stop();
@@ -77,6 +82,7 @@ export async function testInvokerSelfStopBroken(t) {
         nodeArgs: [nodeArg],
         stdout: 'ignore',
         stderr: 'ignore',
+        STOP_TIMEOUT: DEFAULT_STOP_TIMEOUT,
     });
     let p1;
     let p2;

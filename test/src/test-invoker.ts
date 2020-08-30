@@ -2,6 +2,7 @@ import { ExecutionContext } from 'ava';
 import { Invoker } from '../../dist/invoker';
 import chai from 'chai';
 import chaiAsPromised from 'chai-as-promised';
+import { DEFAULT_STOP_TIMEOUT } from '../../dist/config';
 chai.use(chaiAsPromised);
 const { assert } = chai;
 
@@ -18,6 +19,7 @@ export async function testInvokerNormal(t: ExecutionContext<unknown>) {
         nodeArgs: [nodeArg],
         stdout: 'ignore',
         stderr: 'ignore',
+        STOP_TIMEOUT: DEFAULT_STOP_TIMEOUT,
     });
     await invoker.start(err => {
         assert.isUndefined(err);
@@ -34,6 +36,7 @@ export async function testInvokerSelfStop(t: ExecutionContext<unknown>) {
         nodeArgs: [nodeArg],
         stdout: 'ignore',
         stderr: 'ignore',
+        STOP_TIMEOUT: DEFAULT_STOP_TIMEOUT,
     });
     let p1: Promise<void>;
     let p2: Promise<void>;
@@ -56,6 +59,7 @@ export async function testInvokerFailed(t: ExecutionContext<unknown>) {
         nodeArgs: [nodeArg],
         stdout: 'ignore',
         stderr: 'ignore',
+        STOP_TIMEOUT: DEFAULT_STOP_TIMEOUT,
     });
     await assert.isRejected(invoker.start());
     await invoker.stop();
@@ -70,6 +74,7 @@ export async function testInvokerBroken(t: ExecutionContext<unknown>) {
         nodeArgs: [nodeArg],
         stdout: 'ignore',
         stderr: 'ignore',
+        STOP_TIMEOUT: DEFAULT_STOP_TIMEOUT,
     });
     await invoker.start();
     await invoker.stop();
@@ -84,6 +89,7 @@ export async function testInvokerSelfStopBroken(t: ExecutionContext<unknown>) {
         nodeArgs: [nodeArg],
         stdout: 'ignore',
         stderr: 'ignore',
+        STOP_TIMEOUT: DEFAULT_STOP_TIMEOUT,
     });
     let p1: Promise<void>;
     let p2: Promise<void>;

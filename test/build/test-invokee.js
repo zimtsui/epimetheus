@@ -1,6 +1,6 @@
 import { fork } from 'child_process';
 import { once } from 'events';
-import { STOP_SIGNAL } from '../../dist/config';
+import { STOP_SIGNAL, DEFAULT_STOP_TIMEOUT } from '../../dist/config';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 const packagePath = resolve(fileURLToPath(dirname(import.meta.url)), '../..');
@@ -15,7 +15,8 @@ export async function testInvokeeNormal(t) {
         execArgv: [nodeArg],
         env: {
             ...process.env,
-            epimetheus: 'true',
+            EPIMETHEUS: 'true',
+            STOP_TIMEOUT: `${DEFAULT_STOP_TIMEOUT}`,
         },
         stdio,
     });
@@ -40,7 +41,8 @@ export async function testInvokeeSelfStop(t) {
         execArgv: [nodeArg],
         env: {
             ...process.env,
-            epimetheus: '',
+            EPIMETHEUS: 'true',
+            STOP_TIMEOUT: `${DEFAULT_STOP_TIMEOUT}`,
         },
         stdio,
     });
@@ -66,7 +68,8 @@ export async function testInvokeeFailed(t) {
         execArgv: [nodeArg],
         env: {
             ...process.env,
-            epimetheus: '',
+            EPIMETHEUS: 'true',
+            STOP_TIMEOUT: `${DEFAULT_STOP_TIMEOUT}`,
         },
         stdio,
     });
@@ -92,7 +95,8 @@ export async function testInvokeeBroken(t) {
         execArgv: [nodeArg],
         env: {
             ...process.env,
-            epimetheus: '',
+            EPIMETHEUS: 'true',
+            STOP_TIMEOUT: `${DEFAULT_STOP_TIMEOUT}`,
         },
         stdio,
     });
@@ -117,7 +121,8 @@ export async function testInvokeeSelfStopBroken(t) {
         execArgv: [nodeArg],
         env: {
             ...process.env,
-            epimetheus: '',
+            EPIMETHEUS: 'true',
+            STOP_TIMEOUT: `${DEFAULT_STOP_TIMEOUT}`,
         },
         stdio,
     });

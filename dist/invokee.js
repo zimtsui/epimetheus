@@ -1,21 +1,23 @@
 import { Startable } from 'startable';
-import { STOP_TIMEOUT } from './config';
 import { resolve } from 'path';
 import { promisify } from 'util';
+const STOP_TIMEOUT = Number.parseInt(process.env.STOP_TIMEOUT);
+let EPIMETHEUS;
 (async () => {
     const sleep = promisify(setTimeout);
-    switch (process.env.epimetheus) {
+    switch (process.env.EPIMETHEUS) {
         case 'false':
-            process.env.epimetheus = '';
+            EPIMETHEUS = '';
             break;
         case 'FALSE':
-            process.env.epimetheus = '';
+            EPIMETHEUS = '';
             break;
         case '':
-            process.env.epimetheus = 'true';
+            EPIMETHEUS = 'true';
             break;
+        default: EPIMETHEUS = process.env.EPIMETHEUS;
     }
-    if (!process.env.epimetheus)
+    if (!EPIMETHEUS)
         console.log('WARNING: It\'s not called by Epimetheus.');
     const any = (promises) => new Promise((resolve, reject) => void promises.forEach(promise => void promise.then(resolve, reject)));
     const Service = (await import(resolve(process.cwd(), process.argv[2]))).default;
@@ -30,19 +32,19 @@ import { promisify } from 'util';
                 // 放到 invokee 的 onStopping() 中处理，因为要在 exit 前输出到 sterr
                 this.stop(err).catch(() => { });
             }).then(() => {
-                if (process.env.epimetheus)
+                if (EPIMETHEUS)
                     process.send("STARTED" /* STARTED */);
             }, () => {
-                if (process.env.epimetheus)
+                if (EPIMETHEUS)
                     process.send("FAILED" /* FAILED */);
             });
         }
         async _stop() {
-            if (process.env.epimetheus)
+            if (EPIMETHEUS)
                 process.send("STOPPING" /* STOPPING */);
             await any([
                 this.service.stop().then(() => {
-                    if (process.env.epimetheus)
+                    if (EPIMETHEUS)
                         process.disconnect();
                 }),
                 sleep(STOP_TIMEOUT).then(() => { throw new Error('stop() times out.'); }),

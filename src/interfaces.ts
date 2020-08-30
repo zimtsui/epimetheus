@@ -12,11 +12,13 @@ export interface ConfigBase {
 export interface SerializableConfig extends ConfigBase {
     outFilePath: string;
     errFilePath: string;
+    STOP_TIMEOUT: number;
 }
 
 export interface InvokerConfig extends ConfigBase {
     stdout: Writable | 'ignore' | 'inherit';
     stderr: Writable | 'ignore' | 'inherit';
+    STOP_TIMEOUT: number;
 }
 
 export interface Info extends ConfigBase {
