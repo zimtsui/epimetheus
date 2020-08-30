@@ -71,7 +71,7 @@ class Recaller extends Startable {
     public kill() {
         // 这句话不需要，因为 kill() 是最后一个事件循环。
         // this.shouldBeRunning = false;
-        this.invoker.kill();
+        if (this.invoker) this.invoker.kill();
         (<WriteStream>this.invoker.config.stdout).destroy();
         (<WriteStream>this.invoker.config.stderr).destroy();
     }
