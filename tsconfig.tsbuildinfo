@@ -512,8 +512,8 @@
         "affectsGlobalScope": false
       },
       "./src/invoker.ts": {
-        "version": "7e60a10ff81812517de03cbc105a47d2cdc7cccfa2b4d67be9a63ed3d573243b",
-        "signature": "6bdbd7863d8064a8995170a0273b15b764280fc0da949048a0a3016f1ab0edcc",
+        "version": "f98ab910e8de8d995f68c5165e93bc6a51a7ab39b5375d834cdebfed4d565e3a",
+        "signature": "fb9df046ff5b0f6d553e985778f86a3874d5baa3a1e290d7a560e4feacb5662f",
         "affectsGlobalScope": false
       },
       "./node_modules/@types/fs-extra/index.d.ts": {

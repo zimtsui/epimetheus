@@ -57,5 +57,5 @@ class Invoker extends Startable {
             this.subp.kill('SIGKILL');
     }
 }
-export { Invoker as default, Invoker, };
+export { Invoker as default, Invoker, AbnormalExit, };
 //# sourceMappingURL=invoker.js.map

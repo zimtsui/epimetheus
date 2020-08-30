@@ -64,4 +64,5 @@ class Invoker extends Startable {
 export {
     Invoker as default,
     Invoker,
+    AbnormalExit,
 }
