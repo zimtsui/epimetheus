@@ -13,7 +13,7 @@ const workingDirPath = resolve(packagePath, './test/build');
 const nodeArg = '--experimental-specifier-resolution=node';
 const stdio = process.env.NODE_ENV === 'test' ? 'ignore' : 'inherit';
 
-export async function testSoulmateNormal(t: ExecutionContext<unknown>) {
+export async function testInvokeeNormal(t: ExecutionContext<unknown>) {
     const subp = fork(
         soulmatePath,
         [servicePath, 'normal'],
@@ -41,7 +41,7 @@ export async function testSoulmateNormal(t: ExecutionContext<unknown>) {
     await once(subp, 'exit');
 }
 
-export async function testSoulmateSelfStop(t: ExecutionContext<unknown>) {
+export async function testInvokeeSelfStop(t: ExecutionContext<unknown>) {
     const subp = fork(
         soulmatePath,
         [servicePath, 'self stop'],
@@ -70,7 +70,7 @@ export async function testSoulmateSelfStop(t: ExecutionContext<unknown>) {
     ]);
 }
 
-export async function testSoulmateFailed(t: ExecutionContext<unknown>) {
+export async function testInvokeeFailed(t: ExecutionContext<unknown>) {
     const subp = fork(
         soulmatePath,
         [servicePath, 'failed'],
@@ -99,7 +99,7 @@ export async function testSoulmateFailed(t: ExecutionContext<unknown>) {
     await once(subp, 'exit');
 }
 
-export async function testSoulmateBroken(t: ExecutionContext<unknown>) {
+export async function testInvokeeBroken(t: ExecutionContext<unknown>) {
     const subp = fork(
         soulmatePath,
         [servicePath, 'broken'],
@@ -127,7 +127,7 @@ export async function testSoulmateBroken(t: ExecutionContext<unknown>) {
     await once(subp, 'exit');
 }
 
-export async function testSoulmateSelfStopBroken(t: ExecutionContext<unknown>) {
+export async function testInvokeeSelfStopBroken(t: ExecutionContext<unknown>) {
     const subp = fork(
         soulmatePath,
         [servicePath, 'self stop broken'],

@@ -637,7 +637,7 @@
         "affectsGlobalScope": false
       },
       "./src/invokee.ts": {
-        "version": "5b4e6b903ae0bd7e74ad418e4b02c1f165c1f3d559189102595ba222e962659b",
+        "version": "f09c5d5b6a48574a9372cdf901a66c14849cbda33a8e8daf0edbaa6772e98ac8",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
