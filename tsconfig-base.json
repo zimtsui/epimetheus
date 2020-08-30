@@ -1,10 +1,12 @@
 {
     "compilerOptions": {
         /* Basic Options */
-        "target": "es2020",
+        // nodejs 不支持 es2020 的 a?.b
+        "target": "es2019",
         "module": "esnext",
         "moduleResolution": "node",
         "lib": [
+            // import.meta 要求 exnext
             "esnext"
         ],
         // "declarationMap": true,   

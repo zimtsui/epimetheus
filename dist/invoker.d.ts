@@ -6,7 +6,7 @@ declare class AbnormalExit extends Error {
 }
 declare class Invoker extends Startable {
     config: InvokerConfig;
-    subp: ChildProcess | undefined;
+    subp?: ChildProcess;
     constructor(config: InvokerConfig);
     protected _start(): Promise<void>;
     protected _stop(err?: Error): Promise<void>;

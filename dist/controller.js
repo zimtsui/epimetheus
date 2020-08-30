@@ -1,4 +1,4 @@
-#!/usr/bin/env -S node --experimental-specifier-resolution=node
+#!/usr/bin/env -S node --experimental-specifier-resolution=node --enable-source-maps
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
@@ -28,7 +28,7 @@ router
         await recaller.start().then(() => {
             ctx.status = 204;
         }, err => {
-            ctx.body = err;
+            ctx.body = err.stack || null;
             ctx.status = 503;
             ctx.message = 'Failed to start.';
         });
@@ -42,7 +42,7 @@ router
     const name = ctx.query.name;
     let recallersToStop;
     if (name) {
-        const recaller = [...recallers].find(invoker => invoker.config.name === name);
+        const recaller = [...recallers].find(recaller => recaller.config.name === name);
         if (recaller)
             recallersToStop = [recaller];
         else {
@@ -53,12 +53,12 @@ router
     }
     else
         recallersToStop = [...recallers];
-    await Promise.all(recallersToStop.map(async (invoker) => {
-        await invoker.stop();
+    await Promise.all(recallersToStop.map(async (recaller) => {
+        await recaller.stop();
     })).then(() => {
         ctx.status = 204;
-    }, err => {
-        ctx.body = err;
+    }, (err) => {
+        ctx.body = err.stack || null;
         ctx.status = 500;
         ctx.message = 'Failed to stop.';
     });
@@ -67,7 +67,7 @@ router
     const name = ctx.query.name;
     let recallersToDelete;
     if (name) {
-        const recaller = [...recallers].find(invoker => invoker.config.name === name);
+        const recaller = [...recallers].find(recaller => recaller.config.name === name);
         if (recaller)
             recallersToDelete = [recaller];
         else {
@@ -79,15 +79,15 @@ router
     else
         recallersToDelete = [...recallers];
     await Promise.all(recallersToDelete.map(recaller => {
-        if (recaller.lifePeriod === 0 /* CONSTRUCTED */ ||
-            recaller.lifePeriod === 5 /* STOPPED */)
+        if (recaller.lifePeriod === "CONSTRUCTED" /* CONSTRUCTED */ ||
+            recaller.lifePeriod === "STOPPED" /* STOPPED */)
             recallers.delete(recaller);
         else
             throw new Error('a running service cannot be deleted');
     })).then(() => {
         ctx.status = 204;
     }, err => {
-        ctx.body = err;
+        ctx.body = err.stack || null;
         ctx.status = 405;
         ctx.message = err.message;
     });

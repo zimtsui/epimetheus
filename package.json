@@ -11,7 +11,7 @@
         "test": "tsc -b ./test/ && ava ./test/build/test.js"
     },
     "bin": {
-        "epi-invoker": "./dist/invoker.js",
+        "epi-ctrler": "./dist/controller.js",
         "epi-cli": "./dist/cli.js"
     },
     "author": "Zim",

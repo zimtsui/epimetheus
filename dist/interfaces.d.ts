@@ -18,5 +18,6 @@ export interface InvokerConfig extends ConfigBase {
 }
 export interface Info extends ConfigBase {
     recallerStatus: LifePeriod;
-    invokerStatus: LifePeriod;
+    invokerStatus?: LifePeriod;
+    pid?: number;
 }

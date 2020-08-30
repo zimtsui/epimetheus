@@ -26,15 +26,15 @@ import { promisify } from 'util';
                 this.stop(err).catch(() => { });
             }).then(() => {
                 if (process.env.epimetheus)
-                    process.send(2 /* STARTED */);
+                    process.send("STARTED" /* STARTED */);
             }, () => {
                 if (process.env.epimetheus)
-                    process.send(3 /* FAILED */);
+                    process.send("FAILED" /* FAILED */);
             });
         }
         async _stop() {
             if (process.env.epimetheus)
-                process.send(4 /* STOPPING */);
+                process.send("STOPPING" /* STOPPING */);
             await any([
                 this.service.stop().then(() => {
                     if (process.env.epimetheus)

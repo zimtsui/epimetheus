@@ -21,14 +21,14 @@ export async function testInvokeeNormal(t) {
     });
     await new Promise(resolve => {
         subp.on('message', message => {
-            if (message === 2 /* STARTED */)
+            if (message === "STARTED" /* STARTED */)
                 resolve();
         });
     });
     subp.kill(STOP_SIGNAL);
     await new Promise(resolve => {
         subp.on('message', message => {
-            if (message === 4 /* STOPPING */)
+            if (message === "STOPPING" /* STOPPING */)
                 resolve();
         });
     });
@@ -47,13 +47,13 @@ export async function testInvokeeSelfStop(t) {
     await Promise.all([
         new Promise(resolve => {
             subp.on('message', message => {
-                if (message === 2 /* STARTED */)
+                if (message === "STARTED" /* STARTED */)
                     resolve();
             });
         }),
         new Promise(resolve => {
             subp.on('message', message => {
-                if (message === 4 /* STOPPING */)
+                if (message === "STOPPING" /* STOPPING */)
                     resolve();
             });
         }),
@@ -73,13 +73,13 @@ export async function testInvokeeFailed(t) {
     await Promise.all([
         new Promise(resolve => {
             subp.on('message', message => {
-                if (message === 3 /* FAILED */)
+                if (message === "FAILED" /* FAILED */)
                     resolve();
             });
         }),
         await new Promise(resolve => {
             subp.on('message', message => {
-                if (message === 4 /* STOPPING */)
+                if (message === "STOPPING" /* STOPPING */)
                     resolve();
             });
         }),
@@ -98,14 +98,14 @@ export async function testInvokeeBroken(t) {
     });
     await new Promise(resolve => {
         subp.on('message', message => {
-            if (message === 2 /* STARTED */)
+            if (message === "STARTED" /* STARTED */)
                 resolve();
         });
     });
     subp.kill(STOP_SIGNAL);
     await new Promise(resolve => {
         subp.on('message', message => {
-            if (message === 4 /* STOPPING */)
+            if (message === "STOPPING" /* STOPPING */)
                 resolve();
         });
     });
@@ -124,13 +124,13 @@ export async function testInvokeeSelfStopBroken(t) {
     await Promise.all([
         new Promise(resolve => {
             subp.on('message', message => {
-                if (message === 2 /* STARTED */)
+                if (message === "STARTED" /* STARTED */)
                     resolve();
             });
         }),
         await new Promise(resolve => {
             subp.on('message', message => {
-                if (message === 4 /* STOPPING */)
+                if (message === "STOPPING" /* STOPPING */)
                     resolve();
             });
         }),

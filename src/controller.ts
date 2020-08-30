@@ -1,4 +1,4 @@
-#!/usr/bin/env -S node --experimental-specifier-resolution=node
+#!/usr/bin/env -S node --experimental-specifier-resolution=node --enable-source-maps
 import Koa from 'koa';
 import Router from 'koa-router';
 import bodyParser from 'koa-bodyparser';
@@ -33,7 +33,7 @@ router
             await recaller.start().then(() => {
                 ctx.status = 204;
             }, err => {
-                ctx.body = err;
+                ctx.body = err.stack || null;
                 ctx.status = 503;
                 ctx.message = 'Failed to start.'
             });
@@ -47,7 +47,7 @@ router
         const name = <string>ctx.query.name;
         let recallersToStop: Recaller[];
         if (name) {
-            const recaller = [...recallers].find(invoker => invoker.config.name === name);
+            const recaller = [...recallers].find(recaller => recaller.config.name === name);
             if (recaller) recallersToStop = [recaller];
             else {
                 ctx.status = 404;
@@ -56,12 +56,12 @@ router
             }
         } else recallersToStop = [...recallers];
 
-        await Promise.all(recallersToStop.map(async invoker => {
-            await invoker.stop();
+        await Promise.all(recallersToStop.map(async recaller => {
+            await recaller.stop();
         })).then(() => {
             ctx.status = 204;
-        }, err => {
-            ctx.body = err;
+        }, (err: Error) => {
+            ctx.body = err.stack || null;
             ctx.status = 500;
             ctx.message = 'Failed to stop.'
         });
@@ -71,7 +71,7 @@ router
         const name = <string>ctx.query.name;
         let recallersToDelete: Recaller[];
         if (name) {
-            const recaller = [...recallers].find(invoker => invoker.config.name === name);
+            const recaller = [...recallers].find(recaller => recaller.config.name === name);
             if (recaller) recallersToDelete = [recaller];
             else {
                 ctx.status = 404;
@@ -89,7 +89,7 @@ router
         })).then(() => {
             ctx.status = 204;
         }, err => {
-            ctx.body = err;
+            ctx.body = err.stack || null;
             ctx.status = 405;
             ctx.message = err.message;
         });

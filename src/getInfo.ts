@@ -10,7 +10,8 @@ function getInfo(recaller: Recaller): Info {
         args: config.args,
         nodeArgs: config.nodeArgs,
         recallerStatus: recaller.lifePeriod,
-        invokerStatus: recaller.invoker.lifePeriod,
+        invokerStatus: recaller.invoker?.lifePeriod,
+        pid: recaller.invoker?.subp?.pid,
     };
 }
 

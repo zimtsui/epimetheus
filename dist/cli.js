@@ -1,4 +1,4 @@
-#!/usr/bin/env -S node --experimental-specifier-resolution=node
+#!/usr/bin/env -S node --experimental-specifier-resolution=node --enable-source-maps
 import yargs from 'yargs';
 import fetch from 'node-fetch';
 import { PORT } from './config';
@@ -29,7 +29,10 @@ const options = {
     'node-args': {
         describe: 'arguments for nodejs',
         type: 'array',
-        default: ['--experimental-specifier-resolution=node'],
+        default: [
+            '--experimental-specifier-resolution=node',
+            '--enable-source-maps',
+        ],
     },
     config: {
         alias: 'c',
@@ -98,7 +101,7 @@ yargs
 })().catch(console.error)).command('start <name>', 'start a registered daemon', yargs => {
 }, args => (async () => {
     const url = new URL(`http://localhost:${PORT}/start?name=${args.name}`).href;
-    const res = await fetch(url, { method: 'put' });
+    const res = await fetch(url);
     if (!res.ok)
         throw new Error(`${res.status}: ${res.statusText}`);
 })().catch(console.error)).command('stop [name]', 'stop a/all registered daemons', yargs => {
@@ -106,15 +109,15 @@ yargs
     const url = new URL(args.name
         ? `http://localhost:${PORT}/stop?name=${args.name}`
         : `http://localhost:${PORT}/stop`).href;
-    const res = await fetch(url, { method: 'put' });
+    const res = await fetch(url);
     if (!res.ok)
-        throw new Error(`${res.status}: ${res.statusText}`);
+        throw new Error(`${res.status}: ${res.statusText}\n${await res.text()}`);
 })().catch(console.error)).command('delete [name]', 'delete a/all registries', yargs => {
 }, args => (async () => {
     const url = new URL(args.name
         ? `http://localhost:${PORT}/delete?name=${args.name}`
         : `http://localhost:${PORT}/delete`).href;
-    const res = await fetch(url, { method: 'delete' });
+    const res = await fetch(url);
     if (!res.ok)
         throw new Error(`${res.status}: ${res.statusText}`);
 })().catch(console.error)).command('run [name]', 'start a script synchronously', yargs => {

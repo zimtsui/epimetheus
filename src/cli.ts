@@ -1,4 +1,4 @@
-#!/usr/bin/env -S node --experimental-specifier-resolution=node
+#!/usr/bin/env -S node --experimental-specifier-resolution=node --enable-source-maps
 import yargs from 'yargs';
 import fetch from 'node-fetch';
 import { PORT } from './config';
@@ -32,7 +32,10 @@ const options = {
     'node-args': {
         describe: 'arguments for nodejs',
         type: <'string'>'array',
-        default: ['--experimental-specifier-resolution=node'],
+        default: [
+            '--experimental-specifier-resolution=node',
+            '--enable-source-maps',
+        ],
     },
     config: {
         alias: 'c',
@@ -112,7 +115,7 @@ yargs
         yargs => {
         }, args => (async () => {
             const url = new URL(`http://localhost:${PORT}/start?name=${args.name}`).href;
-            const res = await fetch(url, { method: 'put' });
+            const res = await fetch(url);
             if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
         })().catch(console.error)
     ).command(
@@ -124,8 +127,10 @@ yargs
                 ? `http://localhost:${PORT}/stop?name=${args.name}`
                 : `http://localhost:${PORT}/stop`
             ).href;
-            const res = await fetch(url, { method: 'put' });
-            if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
+            const res = await fetch(url);
+            if (!res.ok) throw new Error(
+                `${res.status}: ${res.statusText}\n${await res.text()}`
+            );
         })().catch(console.error)
     ).command(
         'delete [name]',
@@ -136,7 +141,7 @@ yargs
                 ? `http://localhost:${PORT}/delete?name=${args.name}`
                 : `http://localhost:${PORT}/delete`
             ).href;
-            const res = await fetch(url, { method: 'delete' });
+            const res = await fetch(url);
             if (!res.ok) throw new Error(`${res.status}: ${res.statusText}`);
         })().catch(console.error)
     ).command(

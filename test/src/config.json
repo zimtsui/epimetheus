@@ -6,6 +6,7 @@
         "nihao111"
     ],
     "node-args": [
-        "--experimental-specifier-resolution=node"
+        "--experimental-specifier-resolution=node",
+        "--enable-source-maps"
     ]
 }

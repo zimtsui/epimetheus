@@ -11,7 +11,7 @@ import { fileURLToPath } from 'url';
 class AbnormalExit extends Error { }
 
 class Invoker extends Startable {
-    public subp: ChildProcess | undefined;
+    public subp?: ChildProcess;
 
     constructor(public config: InvokerConfig) {
         super();
