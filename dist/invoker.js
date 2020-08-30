@@ -4,7 +4,6 @@ import { once } from 'events';
 import { STOP_SIGNAL } from './config';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
-// TODO: 要考虑 subp.kill() 失败的情况
 class AbnormalExit extends Error {
 }
 class Invoker extends Startable {
@@ -54,7 +53,8 @@ class Invoker extends Startable {
     }
     kill() {
         if (this.subp)
-            this.subp.kill('SIGKILL');
+            return this.subp.kill('SIGKILL');
+        return true;
     }
 }
 export { Invoker as default, Invoker, AbnormalExit, };

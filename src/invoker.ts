@@ -6,8 +6,6 @@ import { InvokerConfig } from './interfaces';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
 
-// TODO: 要考虑 subp.kill() 失败的情况
-
 class AbnormalExit extends Error { }
 
 class Invoker extends Startable {
@@ -56,8 +54,9 @@ class Invoker extends Startable {
         await once(this.subp!, 'exit');
     }
 
-    public kill() {
-        if (this.subp) this.subp.kill('SIGKILL');
+    public kill(): boolean {
+        if (this.subp) return this.subp.kill('SIGKILL');
+        return true;
     }
 }
 

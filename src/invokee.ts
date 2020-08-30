@@ -5,12 +5,14 @@ import { promisify } from 'util';
 (async () => {
     const sleep = promisify(setTimeout);
 
-    if (process.env.epimetheus === 'false') process.env.epimetheus = '';
-    else if (process.env.epimetheus === 'FALSE') process.env.epimetheus = '';
-    else if (process.env.epimetheus === '') process.env.epimetheus = 'true';
+    switch (process.env.epimetheus) {
+        case 'false': process.env.epimetheus = ''; break;
+        case 'FALSE': process.env.epimetheus = ''; break;
+        case '': process.env.epimetheus = 'true'; break;
+    }
 
     if (!process.env.epimetheus)
-        console.log('WARNING: It\'s not called by epimetheus.');
+        console.log('WARNING: It\'s not called by Epimetheus.');
 
     interface StartableConsctrutor {
         new(...args: any[]): Startable;
@@ -31,7 +33,7 @@ import { promisify } from 'util';
 
         protected async _start() {
             await this.service.start(err => {
-                // 放到 invokee 的 onStopping() 中处理，因为要输出到 sterr
+                // 放到 invokee 的 onStopping() 中处理，因为要在 exit 前输出到 sterr
                 this.stop(err).catch(() => { });
             }).then(() => {
                 if (process.env.epimetheus) process.send!(LifePeriod.STARTED);
@@ -54,7 +56,7 @@ import { promisify } from 'util';
 
     const invokee = new Invokee();
     process.on('SIGINT', () => {
-        // 放到 invokee 的 onStopping() 中处理，因为要输出到 sterr
+        // 放到 invokee 的 onStopping() 中处理，因为要在 exit 前输出到 sterr
         invokee.stop().catch(() => { });
     });
     await invokee.start(err => {

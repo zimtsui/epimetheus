@@ -80,15 +80,17 @@ class Recaller extends Startable {
         }
     }
 
-    public kill() {
+    public kill(): boolean {
         // 这句话不需要，因为 kill() 是最后一个事件循环。
         // this.shouldBeRunning = false;
-        if (this.invoker) this.invoker.kill();
 
         if (this.invoker) {
+            const killed = this.invoker.kill();
             (<WriteStream>this.invoker.config.stdout).destroy();
             (<WriteStream>this.invoker.config.stderr).destroy();
+            return killed;
         }
+        return true;
     }
 }
 

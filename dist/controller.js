@@ -116,9 +116,11 @@ process.once('SIGINT', () => {
     });
     console.log('\nreceived SIGINT');
     console.log('send SIGINT again to terminate immediately.');
-    recallers.forEach(recaller => {
-        recaller.kill();
-    });
-    process.exit(0);
+    if ([...recallers].reduce((allKilled, recaller) => {
+        return allKilled && recaller.kill();
+    }, true))
+        process.exit(0);
+    else
+        process.exit(1);
 });
 //# sourceMappingURL=controller.js.map

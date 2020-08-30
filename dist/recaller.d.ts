@@ -8,6 +8,6 @@ declare class Recaller extends Startable {
     constructor(config: SerializableConfig);
     protected _start(): Promise<void>;
     protected _stop(): Promise<void>;
-    kill(): void;
+    kill(): boolean;
 }
 export { Recaller as default, Recaller, };

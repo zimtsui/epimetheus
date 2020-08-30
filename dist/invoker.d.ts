@@ -10,6 +10,6 @@ declare class Invoker extends Startable {
     constructor(config: InvokerConfig);
     protected _start(): Promise<void>;
     protected _stop(err?: Error): Promise<void>;
-    kill(): void;
+    kill(): boolean;
 }
 export { Invoker as default, Invoker, AbnormalExit, };
