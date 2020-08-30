@@ -21,14 +21,14 @@ router
         ctx.message = 'Service already existing.';
     }
 })
-    .put('/start', async (ctx, next) => {
+    .get('/start', async (ctx, next) => {
     const name = ctx.query.name;
     const recaller = [...recallers].find(recaller => recaller.config.name === name);
     if (recaller) {
         await recaller.start().then(() => {
             ctx.status = 204;
         }, err => {
-            console.error(err);
+            ctx.body = err;
             ctx.status = 503;
             ctx.message = 'Failed to start.';
         });
@@ -38,7 +38,7 @@ router
         ctx.message = 'Service not found.';
     }
 })
-    .put('/stop', async (ctx, next) => {
+    .get('/stop', async (ctx, next) => {
     const name = ctx.query.name;
     let recallersToStop;
     if (name) {
@@ -58,12 +58,12 @@ router
     })).then(() => {
         ctx.status = 204;
     }, err => {
-        console.error(err);
+        ctx.body = err;
         ctx.status = 500;
         ctx.message = 'Failed to stop.';
     });
 })
-    .delete('/delete', async (ctx, next) => {
+    .get('/delete', async (ctx, next) => {
     const name = ctx.query.name;
     let recallersToDelete;
     if (name) {
@@ -87,7 +87,7 @@ router
     })).then(() => {
         ctx.status = 204;
     }, err => {
-        console.error(err);
+        ctx.body = err;
         ctx.status = 405;
         ctx.message = err.message;
     });
