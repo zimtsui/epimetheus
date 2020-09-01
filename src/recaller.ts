@@ -63,20 +63,10 @@ class Recaller extends Startable {
             // 对外抛出抽象异常
             throw new Error('invoker stop() error');
         } finally {
-            /* 
-                writable.end() 成功时传入 callback 的第一个参数是不存在的，
-                而不是 null，不符合规范所以不能用 util.promisify()
-            */
-            await new Promise((resolve, reject) => {
-                (<WriteStream>this.invoker!.config.stdout).end((err?: Error) => {
-                    if (!err) resolve(); else reject(err);
-                });
-            });
-            await new Promise((resolve, reject) => {
-                (<WriteStream>this.invoker!.config.stderr).end((err?: Error) => {
-                    if (!err) resolve(); else reject(err);
-                });
-            });
+            const stdout = <WriteStream>this.invoker!.config.stdout;
+            await promisify(stdout.end.bind(stdout))();
+            const stderr = <WriteStream>this.invoker!.config.stderr;
+            await promisify(stderr.end.bind(stderr))();
         }
     }
 

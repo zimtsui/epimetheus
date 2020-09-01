@@ -3,7 +3,7 @@ import Invoker from './invoker';
 import fse from 'fs-extra';
 import { createWriteStream } from 'fs';
 import { once } from 'events';
-import { format } from 'util';
+import { format, promisify } from 'util';
 const { ensureFileSync } = fse;
 class Recaller extends Startable {
     constructor(config) {
@@ -60,26 +60,10 @@ class Recaller extends Startable {
             throw new Error('invoker stop() error');
         }
         finally {
-            /*
-                writable.end() 成功时传入 callback 的第一个参数是不存在的，
-                而不是 null，不符合规范所以不能用 util.promisify()
-            */
-            await new Promise((resolve, reject) => {
-                this.invoker.config.stdout.end((err) => {
-                    if (!err)
-                        resolve();
-                    else
-                        reject(err);
-                });
-            });
-            await new Promise((resolve, reject) => {
-                this.invoker.config.stderr.end((err) => {
-                    if (!err)
-                        resolve();
-                    else
-                        reject(err);
-                });
-            });
+            const stdout = this.invoker.config.stdout;
+            await promisify(stdout.end.bind(stdout))();
+            const stderr = this.invoker.config.stderr;
+            await promisify(stderr.end.bind(stderr))();
         }
     }
     kill() {
