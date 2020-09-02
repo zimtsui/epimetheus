@@ -13,6 +13,7 @@ class Recaller extends Startable {
 
     constructor(public config: SerializableConfig) {
         super();
+        this.reusable = true;
     }
 
     protected async _start() {

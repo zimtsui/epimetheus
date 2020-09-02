@@ -10,6 +10,7 @@ class Recaller extends Startable {
         super();
         this.config = config;
         this.shouldBeRunning = false;
+        this.reusable = true;
     }
     async _start() {
         ensureFileSync(this.config.outFilePath);
