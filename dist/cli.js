@@ -147,6 +147,7 @@ yargs
     });
     process.once('SIGINT', () => {
         process.once('SIGINT', () => {
+            invoker.kill();
             process.exit(1);
         });
         console.log('\nreceived SIGINT');
