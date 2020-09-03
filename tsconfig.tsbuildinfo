@@ -487,8 +487,8 @@
         "affectsGlobalScope": false
       },
       "./src/config.ts": {
-        "version": "2a728ce98fe462a8b41d4fc0700d46bf261da40a5e303e64625daa4f26f3ad79",
-        "signature": "6777555fba7463b7203cc632182d5d683a9aa451037e53750da6923cb4a0d516",
+        "version": "b82ba0cb80e53da2160be14cce796ec849817dfbfca215c771fb5c5f50a79b89",
+        "signature": "5efda659f6740c0a95f453cf310133db818cd663de1746a74ef2cc30be6d332e",
         "affectsGlobalScope": false
       },
       "./node_modules/startable/dist/primitive.d.ts": {
