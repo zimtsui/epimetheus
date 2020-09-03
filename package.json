@@ -11,8 +11,8 @@
         "test": "tsc -b ./test/ && ava ./test/build/test.js"
     },
     "bin": {
-        "epi-ctrler": "./dist/controller.js",
-        "epi-cli": "./dist/cli.js"
+        "epimetheus": "./dist/controller.js",
+        "epi": "./dist/cli.js"
     },
     "author": "Zim",
     "license": "MIT",
