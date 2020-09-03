@@ -76,7 +76,7 @@ yargs
         "strip-aliased": true,
         "strip-dashed": true,
     }).command(
-        'register [name]',
+        ['register [name]', 'reg [name]'],
         'register a script as a daemon',
         yargs => {
             yargs

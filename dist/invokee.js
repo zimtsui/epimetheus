@@ -1,6 +1,6 @@
 import { Startable } from 'startable';
 import { resolve } from 'path';
-import { promisify } from 'util';
+import { promisify, format } from 'util';
 const STOP_TIMEOUT = Number.parseInt(process.env.STOP_TIMEOUT);
 let EPIMETHEUS;
 (async () => {
@@ -51,6 +51,8 @@ let EPIMETHEUS;
             ]);
         }
     }
+    console.log = (patt, ...params) => void console.info(`\n[${new Date()}]\n${format(patt, ...params)}`);
+    console.error = (patt, ...params) => void console.warn(`\n[${new Date()}]\n${format(patt, ...params)}`);
     const invokee = new Invokee();
     process.on('SIGINT', () => {
         // 放到 invokee 的 onStopping() 中处理，因为要在 exit 前输出到 sterr

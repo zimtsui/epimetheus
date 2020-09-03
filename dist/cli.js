@@ -72,7 +72,7 @@ yargs
     .parserConfiguration({
     "strip-aliased": true,
     "strip-dashed": true,
-}).command('register [name]', 'register a script as a daemon', yargs => {
+}).command(['register [name]', 'reg [name]'], 'register a script as a daemon', yargs => {
     yargs
         .positional('name', {
         type: 'string',

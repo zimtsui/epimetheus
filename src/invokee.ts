@@ -1,6 +1,6 @@
 import { Startable, LifePeriod } from 'startable';
 import { resolve } from 'path';
-import { promisify } from 'util';
+import { promisify, format } from 'util';
 const STOP_TIMEOUT = Number.parseInt(<string>process.env.STOP_TIMEOUT);
 let EPIMETHEUS: string | undefined;
 
@@ -56,6 +56,11 @@ let EPIMETHEUS: string | undefined;
             ]);
         }
     }
+
+    console.log = (patt: string, ...params: any[]) =>
+        void console.info(`\n[${new Date()}]\n${format(patt, ...params)}`);
+    console.error = (patt: string, ...params: any[]) =>
+        void console.warn(`\n[${new Date()}]\n${format(patt, ...params)}`);
 
     const invokee = new Invokee();
     process.on('SIGINT', () => {

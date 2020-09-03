@@ -522,7 +522,7 @@
         "affectsGlobalScope": false
       },
       "./src/cli.ts": {
-        "version": "5c3aae9c85fa4ad3e456605c66a054bd21496f8a981cef4f084ee6725f8d2fa8",
+        "version": "ea086b5ca538ec4c39d72d07fba561c36370efe13e0de2d65eb2c05a89aa70ff",
         "signature": "cca4aa131958af28986a53b6bf64538501ce232f07b9e72bb88643c7ebf5ccb9",
         "affectsGlobalScope": false
       },
@@ -637,7 +637,7 @@
         "affectsGlobalScope": false
       },
       "./src/invokee.ts": {
-        "version": "d52cda568de1cc5d6d0023212c3cb6bafc9c72051b3a2fe27ac3224583b139ec",
+        "version": "94944588330f88b273c3e363bce93da9f7d83ce4dc205f638b63935e8de9f463",
         "signature": "8e609bb71c20b858c77f0e9f90bb1319db8477b13f9f965f1a1e18524bf50881",
         "affectsGlobalScope": false
       },
