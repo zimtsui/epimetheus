@@ -110,17 +110,18 @@ server
     .use(bodyParser())
     .use(router.routes())
     .listen(PORT);
-process.once('SIGINT', () => {
-    process.once('SIGINT', () => {
-        process.exit(1);
-    });
-    console.log('\nreceived SIGINT');
-    console.log('send SIGINT again to terminate immediately.');
+function onSignal() {
+    process.once('SIGINT', () => void process.exit(1));
+    process.once('SIGTERM', () => void process.exit(1));
+    console.log('\nreceived SIGINT/SIGTERM');
+    console.log('send SIGINT/SIGTERM again to terminate immediately.');
     if ([...recallers].reduce((allKilled, recaller) => {
         return allKilled && recaller.kill();
     }, true))
         process.exit(0);
     else
         process.exit(1);
-});
+}
+process.once('SIGINT', onSignal);
+process.once('SIGTERM', onSignal);
 //# sourceMappingURL=controller.js.map
