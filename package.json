@@ -15,7 +15,7 @@
         "epi": "./dist/cli.js"
     },
     "author": "Zim",
-    "license": "MIT",
+    "license": "SEE LICENSE IN ./LICENSE",
     "dependencies": {
         "@types/fs-extra": "^9.0.1",
         "@types/koa": "^2.11.4",
