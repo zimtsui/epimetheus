@@ -40,7 +40,7 @@ class Invoker extends Startable {
         this.subp.on('message', (message: LifePeriod) => {
             if (message === LifePeriod.STOPPING) this.stop(new Error('self stop'));
         });
-        await Bluebird.any([
+        const err = await Bluebird.any([
             new Promise((resolve, reject) => {
                 this.subp!.on('message', (message: LifePeriod) => {
                     switch (message) {
@@ -49,10 +49,9 @@ class Invoker extends Startable {
                     }
                 });
             }),
-            once(this.subp, 'exit').then(() => {
-                throw new AbnormalExit('Subprocess terminated during starting.');
-            }),
+            once(this.subp, 'exit').then(() => new AbnormalExit('Subprocess terminated during starting.')),
         ]);
+        if (err instanceof AbnormalExit) throw err;
     }
 
     protected async _stop(err?: Error) {

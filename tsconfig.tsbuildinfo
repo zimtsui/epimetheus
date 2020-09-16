@@ -507,7 +507,7 @@
         "affectsGlobalScope": false
       },
       "./src/invoker.ts": {
-        "version": "adfcc91c776be12b2cf960b53f53ec48d5b1a1457e8ada092108ed1b757c5993",
+        "version": "6be73f9e17115362b1e612914312bb00f2583fd3d9cc134724ca527dc10a2118",
         "signature": "fbf16459e1e9c3f7301b918a15a4deef7c562131a011f01ffb58f3fc9e40f5e6",
         "affectsGlobalScope": false
       },
