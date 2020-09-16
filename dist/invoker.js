@@ -32,18 +32,23 @@ class Invoker extends Startable {
             if (message === "STOPPING" /* STOPPING */)
                 this.stop(new Error('self stop'));
         });
-        await new Promise((resolve, reject) => {
-            this.subp.on('message', (message) => {
-                switch (message) {
-                    case "STARTED" /* STARTED */:
-                        resolve();
-                        break;
-                    case "FAILED" /* FAILED */:
-                        reject();
-                        break;
-                }
-            });
-        });
+        await Promise.any([
+            new Promise((resolve, reject) => {
+                this.subp.on('message', (message) => {
+                    switch (message) {
+                        case "STARTED" /* STARTED */:
+                            resolve();
+                            break;
+                        case "FAILED" /* FAILED */:
+                            reject();
+                            break;
+                    }
+                });
+            }),
+            once(this.subp, 'exit').then(() => {
+                throw new AbnormalExit('Subprocess terminated during starting.');
+            }),
+        ]);
     }
     async _stop(err) {
         if (err instanceof AbnormalExit)

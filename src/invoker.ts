@@ -39,14 +39,19 @@ class Invoker extends Startable {
         this.subp.on('message', (message: LifePeriod) => {
             if (message === LifePeriod.STOPPING) this.stop(new Error('self stop'));
         });
-        await new Promise((resolve, reject) => {
-            this.subp!.on('message', (message: LifePeriod) => {
-                switch (message) {
-                    case LifePeriod.STARTED: resolve(); break;
-                    case LifePeriod.FAILED: reject(); break;
-                }
-            });
-        });
+        await Promise.any([
+            new Promise((resolve, reject) => {
+                this.subp!.on('message', (message: LifePeriod) => {
+                    switch (message) {
+                        case LifePeriod.STARTED: resolve(); break;
+                        case LifePeriod.FAILED: reject(); break;
+                    }
+                });
+            }),
+            once(this.subp, 'exit').then(() => {
+                throw new AbnormalExit('Subprocess terminated during starting.');
+            }),
+        ]);
     }
 
     protected async _stop(err?: Error) {
