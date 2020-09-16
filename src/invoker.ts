@@ -5,6 +5,7 @@ import { STOP_SIGNAL } from './config';
 import { InvokerConfig } from './interfaces';
 import { resolve, dirname } from 'path';
 import { fileURLToPath } from 'url';
+import Bluebird from 'bluebird';
 
 class AbnormalExit extends Error { }
 
@@ -39,7 +40,7 @@ class Invoker extends Startable {
         this.subp.on('message', (message: LifePeriod) => {
             if (message === LifePeriod.STOPPING) this.stop(new Error('self stop'));
         });
-        await Promise.any([
+        await Bluebird.any([
             new Promise((resolve, reject) => {
                 this.subp!.on('message', (message: LifePeriod) => {
                     switch (message) {
