@@ -46,7 +46,7 @@ class Invoker extends Startable {
                     }
                 });
             }),
-            once(this.subp, 'exit').then(() => new AbnormalExit('Subprocess terminated during starting.')),
+            once(this.subp, 'exit').then(() => new AbnormalExit('Subprocess terminated during starting without sending a FAILED, maybe because all objects are unreferenced.')),
         ]);
         if (err instanceof AbnormalExit)
             throw err;
